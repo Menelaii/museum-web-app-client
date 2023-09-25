@@ -1,0 +1,46 @@
+<section class="last-news">
+  <div class="home-page-section__separator"></div>
+  <div class="home-page-section__header-line">
+    <h1 class="home-page-section__header">ПОСЛЕДНИЕ НОВОСТИ</h1>
+
+    <div class="home-page-section__carousel-buttons">
+      <div class="home-page-section__carousel-button" (click)="prev()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="26" viewBox="0 0 16 26" fill="none">
+          <path d="M7.25205 12.8319L14.9304 20.5106C15.3205 20.9003 15.5152 21.377 15.5152 21.9406C15.5152 22.5041 15.3205 22.9806 14.9304 23.3703L13.7456 24.5555C13.3561 24.945 12.8793 25.1399 12.316 25.1399C11.7526 25.1399 11.2761 24.945 10.886 24.5555L0.584715 14.2699C0.194905 13.8801 0 13.4035 0 12.8398C0 12.2762 0.19485 11.8 0.584715 11.41L10.8859 1.12445C11.2761 0.734694 11.7525 0.539843 12.3159 0.539843C12.8793 0.539843 13.356 0.734694 13.7456 1.12445L14.9303 2.30937C15.3205 2.69891 15.5151 3.17289 15.5151 3.73143C15.5151 4.28953 15.3204 4.76882 14.9303 5.16903L7.25205 12.8319Z" fill="#262728"/>
+        </svg>
+      </div>
+
+      <div class="home-page-section__carousel-button" (click)="next()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="25" viewBox="0 0 16 25" fill="none">
+          <path d="M8.26308 12.4479L0.584751 4.76919C0.194609 4.37944 -1.90735e-05 3.90275 -1.90735e-05 3.33917C-1.90735e-05 2.77565 0.194664 2.29918 0.584751 1.90948L1.76951 0.724331C2.15904 0.334742 2.63579 0.139893 3.19915 0.139893C3.7625 0.139893 4.23903 0.334742 4.62917 0.724331L14.9304 11.0099C15.3202 11.3997 15.5151 11.8763 15.5151 12.4399C15.5151 13.0036 15.3203 13.4798 14.9304 13.8697L4.62923 24.1553C4.23908 24.5451 3.76261 24.7399 3.1992 24.7399C2.63579 24.7399 2.1591 24.5451 1.76957 24.1553L0.584806 22.9704C0.194664 22.5809 3.52859e-05 22.1069 3.52859e-05 21.5484C3.52859e-05 20.9903 0.194719 20.511 0.584806 20.1108L8.26308 12.4479Z" fill="#262728"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!this.loading; else spinner">
+    <carousel #lastNewsCarousel
+              [showIndicators]="showIndicators"
+              [interval]="interval"
+    >
+      <slide *ngFor="let slideContent of chunks; let i = index" >
+        <div class="last-news__grid">
+          <ng-container *ngFor="let item of slideContent; let j = index;">
+            <app-short-news-card (click)="onCardClick(item)"
+                                 *ngIf="j < chunkSize" [model]="item"></app-short-news-card>
+          </ng-container>
+        </div>
+      </slide>
+    </carousel>
+  </ng-container>
+</section>
+
+
+<ng-template #spinner>
+  <div class="spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+</ng-template>
+

@@ -1,0 +1,223 @@
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb__item">
+      <svg class="breadcrumb__logo" xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14"
+           fill="none">
+        <path
+          d="M13.8762 6.58207L7.83682 0.547696L7.43201 0.143008C7.33977 0.051409 7.21504 0 7.08503 0C6.95502 0 6.83028 0.051409 6.73805 0.143008L0.293904 6.58207C0.199393 6.67619 0.124699 6.78827 0.0742312 6.91172C0.0237638 7.03517 -0.00145455 7.16747 6.47848e-05 7.30082C0.00631668 7.85082 0.464268 8.28988 1.01444 8.28988H1.6787V13.3789H12.4914V8.28988H13.1697C13.437 8.28988 13.6886 8.1852 13.8777 7.99613C13.9708 7.90334 14.0446 7.793 14.0948 7.6715C14.145 7.55 14.1705 7.41976 14.17 7.28832C14.17 7.0227 14.0653 6.77113 13.8762 6.58207ZM7.96029 12.2539H6.20976V9.06645H7.96029V12.2539ZM11.366 7.16488V12.2539H8.9606V8.69145C8.9606 8.34613 8.68082 8.06645 8.33541 8.06645H5.83465C5.48923 8.06645 5.20946 8.34613 5.20946 8.69145V12.2539H2.80404V7.16488H1.30359L7.08659 1.38832L7.44764 1.74926L12.868 7.16488H11.366Z"
+          fill="black" fill-opacity="0.45"/>
+      </svg>
+      <a routerLink="/">Главная</a>
+    </li>
+    <li class="breadcrumb__item"><a routerLink="/biographies">Биографии</a></li>
+    <li class="breadcrumb__item breadcrumb__item_active">Биография</li>
+  </ol>
+</nav>
+
+<div class="biography__wrap" *ngIf="!isLoading && biography; else spinner">
+  <div class="info-card biography__info-card biography__section-margin">
+    <carousel class="info-card__carousel" [interval]="5000" [noPause]="false" [showIndicators]="true">
+      <slide *ngFor="let image of biography.images" [active]="image.isPreview">
+        <div class="info-card__carousel-item-holder">
+          <img class="info-card__img"
+               [src]="image.uri"
+               alt="img"
+               (click)="fullscreenImageView.open(image.uri)"
+          >
+        </div>
+      </slide>
+    </carousel>
+
+    <table>
+      <tbody>
+      <tr>
+        <td class="info-card__key">Фамилия</td>
+        <td class="info-card__value">{{biography.surname}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Имя</td>
+        <td class="info-card__value">{{biography.name}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Отчество</td>
+        <td class="info-card__value">{{biography.patronymic}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Дата рождения</td>
+        <td class="info-card__value">{{biography.birthDate | ruDate}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Место рождения</td>
+        <td class="info-card__value">{{biography.placeOfBirth}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Дата смерти</td>
+        <td class="info-card__value">{{biography.dateOfDeath | ruDate}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Место смерти</td>
+        <td class="info-card__value">{{biography.placeOfDeath}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="biography__medal-details" *ngIf="biography.medalDetails.length != 0">
+    <div class="biography__medal-details-grid">
+      <ng-container *ngFor="let medalDetails of biography.medalDetails">
+        <div class="biography__medal-detail" (click)="onMedalClick(medalDetails)">
+          <img class="biography__medal-detail-img" [src]="medalDetails.medal.image.uri" alt="medal">
+        </div>
+      </ng-container>
+    </div>
+
+    <app-medal-detailed-view [medalDetails]="selectedMedal"></app-medal-detailed-view>
+  </div>
+
+  <div class="biography__details biography__section-margin" *ngIf="biography.militaryRankDetails.length != 0">
+    <div class="biography__details-header">
+      <h2 class="biography__details-header-text">ВОИНСКИЕ ЗВАНИЯ</h2>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>
+          Звание
+        </th>
+
+        <th>
+          Дата присвоения
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let rank of biography.militaryRankDetails">
+        <td>
+          <img class="biography__details-rank-img" [src]="rank.rank.image.uri" alt="img">
+        </td>
+        <td>
+          {{rank.dateOfAssignment | ruDate}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="biography__details biography__section-margin" *ngIf="biography.militaryServiceDetails.length != 0">
+    <div class="biography__details-header">
+      <h2 class="biography__details-header-text">СВЕДЕНИЯ О ВОЕННОЙ СЛУЖБЕ</h2>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>
+          Место службы
+        </th>
+
+        <th>
+          Должность
+        </th>
+
+        <th>
+          Дата начала службы
+        </th>
+
+        <th>
+          Дата окончания службы
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let details of biography.militaryServiceDetails">
+        <td>
+          {{details.placeOfService}}
+        </td>
+
+        <td>
+          {{details.position}}
+        </td>
+
+        <td>
+          {{details.startDate | ruDate}}
+        </td>
+
+        <td>
+          {{details.endDate | ruDate}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="biography__details biography__section-margin" *ngIf="biography.employmentHistory.length != 0">
+    <div class="biography__details-header">
+      <h2 class="biography__details-header-text">СВЕДЕНИЯ ОБ УЧЁБЕ И РАБОТЕ В МИРНОЕ ВРЕМЯ</h2>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>
+          Организация
+        </th>
+
+        <th>
+          Должность
+        </th>
+
+        <th>
+          Дата начала службы
+        </th>
+
+        <th>
+          Дата окончания службы
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let details of biography.employmentHistory">
+        <td>
+          {{details.placeOfService}}
+        </td>
+
+
+        <td>
+          {{details.position}}
+        </td>
+
+        <td>
+          {{details.startDate | ruDate}}
+        </td>
+
+        <td>
+          {{details.endDate | ruDate}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="biography__details" *ngIf="biography.presentation">
+    <div class="biography__details-header biography__presentation-margin">
+      <h2 class="biography__details-header-text">ВЛОЖЕНИЯ</h2>
+    </div>
+
+    <div class="biography__presentation">
+<!--      //todo-->
+      <p class="biography__presentation-title">Презентация</p>
+      <button class="biography__presentation-button" (click)="onViewPresentationClick()"
+      >Посмотреть презентацию</button>
+    </div>
+  </div>
+
+
+</div>
+
+<ng-template #spinner>
+  <div class="spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+</ng-template>
+
+<app-fullscreen-image-view #fullscreenImageView></app-fullscreen-image-view>

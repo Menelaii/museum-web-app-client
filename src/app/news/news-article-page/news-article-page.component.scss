@@ -1,0 +1,32 @@
+@import "src/styles.scss";
+@import "src/app/shared/styles/breadcrumb.scss";
+@import "src/app/shared/styles/content-wrap.scss";
+@import "src/app/shared/styles/info-card.scss";
+@import "src/app/shared/styles/spinner.scss";
+
+.article {
+  &__wrap {
+    @include content-wrap;
+  }
+
+  &__date {
+    color: rgba(38, 39, 40, 0.69);
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.44px;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    color: $color-dark-blue;
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    //letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+}

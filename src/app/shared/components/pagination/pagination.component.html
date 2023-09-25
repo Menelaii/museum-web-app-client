@@ -1,0 +1,23 @@
+<div class="pag-wrapper">
+  <ul class="_pagination">
+    <li [ngClass]="{'_pagination__item': true, '_pagination__item_disabled': currentPage == 1}"
+        (click)="onPageChanged(currentPage - 1)">
+      <a class="_pagination__page-link">Предыдущая</a>
+    </li>
+
+    <ng-container *ngFor="let page of pages">
+      <li
+        [ngClass]="{'_pagination__item': true,
+         '_pagination__item_active': currentPage == page,
+        '_pagination__item_disabled': page > pages.length}"
+        (click)="onPageChanged(page)">
+        <a class="_pagination__page-link">{{page}}</a>
+      </li>
+    </ng-container>
+
+    <li [ngClass]="{'_pagination__item': true, '_pagination__item_disabled': currentPage == pages.length}"
+        (click)="onPageChanged(+currentPage + 1)">
+      <a class="_pagination__page-link">Следующая</a>
+    </li>
+  </ul>
+</div>

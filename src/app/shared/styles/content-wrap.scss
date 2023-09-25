@@ -1,0 +1,29 @@
+@import "src/styles.scss";
+
+@mixin content-wrap() {
+  padding: 23px 23px 60px;
+  box-shadow: $box-shadow-1;
+  background-color: $color-white;
+  width: 70.4861%;
+  margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@mixin content-header-separator() {
+  height: 2px;
+  width: 100%;
+  margin-bottom: 25px;
+  background-color: $color-gray;
+}
+
+@mixin content-header() {
+  color: $color-black;
+  font-family: 'Open-Sans', sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 160%;
+  letter-spacing: 3.2px;
+}

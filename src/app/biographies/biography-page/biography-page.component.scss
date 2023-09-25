@@ -1,0 +1,161 @@
+@import "../../../styles.scss";
+@import "../../shared/styles/breadcrumb";
+@import "src/app/shared/styles/content-wrap.scss";
+@import "src/app/shared/styles/info-card.scss";
+@import "src/app/shared/styles/spinner.scss";
+
+.biography {
+  &__wrap {
+    @include content-wrap;
+  }
+
+  &__info-card {
+    grid-template-columns: 1fr 2.5fr;
+    grid-column-gap: 20px;
+  }
+
+  &__details-header {
+    height: 73px;
+    background-color: #F9FBFB;
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 14px 36px;
+  }
+
+  &__details-header-text {
+    color: $color-black;
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 2.24px;
+    margin: 0;
+  }
+
+  &__details {
+    table {
+      width: 100%;
+      height: 0;
+      border-collapse: collapse;
+    }
+
+    tbody {
+      display: table-row-group;
+      vertical-align: middle;
+      border-color: inherit;
+    }
+
+    tr {
+      display: table-row;
+      vertical-align: inherit;
+      border-color: inherit;
+    }
+
+    th {
+      padding-left: 37px;
+      padding-bottom: 14px;
+      padding-top: 14px;
+
+      vertical-align: middle;
+      box-sizing: border-box;
+      border-top: 1px solid $color-gray;
+
+      color: $color-black;
+      font-family: 'Open-Sans', sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    td {
+      padding-left: 37px;
+      padding-bottom: 14px;
+      padding-top: 14px;
+
+      vertical-align: middle;
+      box-sizing: border-box;
+      border-top: 1px solid $color-gray;
+
+      color: $color-black;
+      font-family: 'Open-Sans', sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+    }
+  }
+
+  &__details-rank-img {
+    height: 45px;
+  }
+
+  &__section-margin {
+    margin-bottom: 60px;
+  }
+
+  &__presentation {
+    width: 100%;
+    height: 152px;
+    box-sizing: border-box;
+    padding-top: 14px;
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+
+  &__presentation-title {
+    color: $color-black;
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+
+    //margin-bottom: 14px;
+  }
+
+  &__presentation-button {
+    display: flex;
+    box-sizing: border-box;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-white;
+    border: 1px solid $color-gray;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+
+    color: $color-black;
+    text-align: center;
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  &__medal-details {
+    margin-bottom: 60px;
+  }
+
+  &__medal-details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+
+    margin-bottom: 20px;
+  }
+
+  &__medal-detail {
+    display: flex;
+    justify-content: center;
+
+    max-height: 290px;
+    height: 100%;
+
+    cursor: pointer;
+  }
+
+  &__medal-detail-img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}

@@ -1,0 +1,41 @@
+@import "src/styles.scss";
+
+.home-page-section {
+  &__separator {
+    height: 4px;
+    width: 100%;
+    background-color: $color-dark-blue;
+    margin-bottom: 30px;
+  }
+
+  &__header {
+    margin: 0;
+
+    color: $color-black;
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__header-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+  }
+
+  &__carousel-buttons {
+    padding-right: 14px;
+  }
+
+  &__carousel-button {
+    display: inline-block;
+    margin-right: 32px;
+    cursor: pointer;
+  }
+
+  &__carousel-button:last-child {
+    margin-right: 0;
+  }
+}

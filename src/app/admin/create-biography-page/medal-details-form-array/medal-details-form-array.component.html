@@ -1,0 +1,20 @@
+<form [formGroup]="subForm" class="sub-form">
+  <p class="sub-form__title">Награды</p>
+  <div class="sub-form__title-separator"></div>
+
+  <div class="sub-form__form-array" formArrayName="medalDetailsArray">
+    <div *ngFor="let control of formArrayController.getControls(); let i = index">
+      <app-medal-details-form
+        [subform]="control"
+        [medals]="medals"
+      ></app-medal-details-form>
+      <div class="sub-form__title-separator"></div>
+    </div>
+  </div>
+
+  <div class="admin-form__form-array-options">
+    <a (click)="formArrayController.addControl()">+ Добавить</a>
+    <p>|</p>
+    <a (click)="formArrayController.removeLastControl()">- Убрать</a>
+  </div>
+</form>

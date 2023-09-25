@@ -1,0 +1,44 @@
+<form class="filters" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="filters__row filters__row_long-line">
+    <input class="filters__input" type="text"
+           placeholder="Наименование музейного предмета" formControlName="title">
+    <button class="filters__submit" type="submit">Поиск</button>
+  </div>
+
+  <a class="filters__collapse-a" (click)="isCollapsed = !isCollapsed"
+     [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+    Расширенный поиск
+  </a>
+
+  <hr class="filters__collapse-separator">
+
+  <div id="collapseBasic" [collapse]="isCollapsed">
+    <div class="filters__row filters__row_select-line">
+      <label>
+        <p class="filters__row-label">Тип предмета</p>
+        <div class="filters__select-wrapper">
+          <select formControlName="artifactType">
+            <option
+              *ngFor="let type of enumTranslator.getTypes()"
+              [value]="type.value">{{type.translation}}
+            </option>
+          </select>
+        </div>
+      </label>
+
+      <label>
+        <p class="filters__row-label">Категория ценности</p>
+        <div class="filters__select-wrapper">
+          <select formControlName="valueCategory">
+            <option
+              *ngFor="let category of enumTranslator.getValueCategories()"
+              [value]="category.value"
+            >
+              {{category.translation}}
+            </option>
+          </select>
+        </div>
+      </label>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,138 @@
+@import "src/styles.scss";
+
+.filters {
+  font-family: 'Open-Sans', sans-serif;
+  margin-bottom: 40px;
+
+  &__collapse-a {
+    cursor: pointer;
+
+    color: $color-dark-blue;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 24px;
+    text-decoration: none;
+  }
+
+  &__collapse-separator {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__row {
+    display: grid;
+    margin-bottom: 12px;
+
+    &_long-line {
+      grid-template-columns: 4fr 1fr;
+      column-gap: 18px;
+    }
+
+    &_select-line {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 21px;
+    }
+
+    &_three-inputs {
+      display: grid;
+      margin-bottom: 12px;
+      grid-template-columns: 2fr 2fr 2fr 1fr;
+      column-gap: 11px;
+    }
+  }
+
+  &__submit {
+    border-radius: 3px;
+    background: $color-green;
+    padding: 8px 70px;
+    border: none;
+
+    color: $color-white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  &__input {
+    color: $color-black;
+    font-size: 16px;
+    font-weight: 400;
+
+    height: 39px;
+  }
+
+  input {
+    padding: 5px 10px;
+    height: 39px;
+    width: 100%;
+  }
+
+  input:focus {
+    padding: 5px 10px;
+    outline: 0;
+    border: 1px solid $color-black;
+  }
+
+  button {
+    height: 100%;
+  }
+
+  label {
+    color: $color-black;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px; /* 133.333% */
+  }
+
+  &__row-label {
+    margin-bottom: 4px;
+  }
+
+  label select {
+    font-size: 16px;
+  }
+
+  select {
+    background: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    border-radius: 3px;
+    border: 1px solid $color-black;
+    background: $color-white;
+
+    padding: 5px 10px;
+    width: 100%;
+    display: block;
+    height: 39px;
+  }
+
+  &__select-wrapper {
+    position: relative;
+  }
+
+  &__select-wrapper::after {
+    content: "";
+
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8.7px 5px 0 5px;
+    border-color: $color-black transparent transparent transparent;
+
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    z-index: 1;
+  }
+
+  select:focus {
+    outline: 0;
+    border-color: $color-black;
+  }
+}
+

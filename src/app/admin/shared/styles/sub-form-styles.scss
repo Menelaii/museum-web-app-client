@@ -1,0 +1,44 @@
+@import "src/styles.scss";
+@import "src/app/admin/shared/styles/form-styles.scss";
+@import "src/app/shared/styles/filters.scss";
+
+.sub-form-container {
+  display: block;
+  width: 100%;
+
+  padding-top: 40px;
+}
+
+.sub-form {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    color: $color-black;
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 130%;
+    font-weight: 600;
+  }
+
+  &__title-separator {
+    height: 2px;
+    width: 100%;
+    margin-bottom: 25px;
+    background-color: $color-gray;
+  }
+
+  .custom-select {
+    margin-bottom: 20px;
+  }
+
+  label {
+    width: 100%;
+    margin-bottom: 20px;
+
+    input {
+     margin-bottom: 0;
+    }
+  }
+}

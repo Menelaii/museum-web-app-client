@@ -1,0 +1,11 @@
+@import "../../../styles.scss";
+@import "../../shared/styles/breadcrumb";
+@import "src/app/shared/styles/content-wrap.scss";
+@import "src/app/shared/styles/info-card.scss";
+@import "src/app/shared/styles/spinner.scss";
+
+.artifact {
+  &__wrap {
+    @include content-wrap;
+  }
+}

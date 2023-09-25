@@ -1,0 +1,79 @@
+@import "src/styles.scss";
+@import "src/app/shared/styles/content-wrap.scss";
+
+.login-page {
+  @include content-wrap();
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 50%;
+
+  &__header {
+    @include content-header();
+    letter-spacing: normal;
+    margin: 0 0 20px;
+  }
+
+  &__separator {
+    @include content-header-separator();
+  }
+
+  &__input {
+    display: block;
+    color: $color-black;
+    font-size: 16px;
+    font-weight: 400;
+
+    height: 40px;
+    padding: 5px 10px;
+    width: 70%;
+    margin-bottom: 20px;
+
+    &_last {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__input:focus {
+    padding: 5px 10px;
+    outline: 0;
+    border: 1px solid $color-black;
+  }
+
+  &__button {
+    width: 30%;
+
+    font-family: 'Open-Sans', sans-serif;
+    border-radius: 3px;
+    background: $color-green;
+    padding: 10px 30px;
+    border: none;
+
+    color: $color-white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+
+    &:disabled {
+      background-color: #49a069bf;
+    }
+  }
+
+  &__error {
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 14px;
+    color: #FF6B62;
+  }
+}
+
+//
+//&__label {
+//  width: 70%;
+//  margin-bottom: 10px;
+//
+//  &_last {
+//    margin-bottom: 20px;
+//  }
+//}

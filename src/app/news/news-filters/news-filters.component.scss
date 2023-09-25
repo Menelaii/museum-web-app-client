@@ -1,0 +1,73 @@
+@import "src/styles.scss";
+
+@mixin news-filters-font($color, $font-weight) {
+  font-family: 'Open-Sans', sans-serif;
+  font-size: 20px;
+
+  color: $color;
+  font-weight: $font-weight;
+  font-style: normal;
+}
+
+.news-filters {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 40px;
+
+  &__control {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+  }
+
+  &__row-label {
+    @include news-filters-font(rgba(38, 39, 40, 0.69), normal);
+
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: none;
+    border: none;
+
+    padding-right: 10px;
+    width: 100%;
+    display: block;
+    height: 100%;
+
+    @include news-filters-font($color-dark-blue, 600);
+    text-transform: uppercase;
+  }
+
+  &__select-wrapper {
+    position: relative;
+  }
+
+  &__select-wrapper::after {
+    content: "";
+
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8.7px 5px 0 5px;
+    border-color: $color-black transparent transparent transparent;
+
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -5px;
+    z-index: 1;
+  }
+
+  select:focus {
+    outline: 0;
+    border: none;
+  }
+}

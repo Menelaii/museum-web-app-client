@@ -1,0 +1,20 @@
+<div class="news-filters news-filters__row">
+  <div class="news-filters__control">
+    <p class="news-filters__row-label">Месяц:</p>
+    <div class="news-filters__select-wrapper">
+      <select [(ngModel)]="selectedMonth" (change)="onMonthChange()">
+        <option *ngFor="let month of months" [value]="month.value"
+                [selected]="selectedMonth === month.value">{{month.translation}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="news-filters__control">
+    <p class="news-filters__row-label">Год:</p>
+    <div class="news-filters__select-wrapper">
+      <select [(ngModel)]="selectedYear" (change)="onYearChange()">
+        <option *ngFor="let year of years" [value]="year" [selected]="year === currentYear">{{year}}</option>
+      </select>
+    </div>
+  </div>
+</div>

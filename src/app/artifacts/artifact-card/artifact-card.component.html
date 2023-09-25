@@ -1,0 +1,19 @@
+<div class="artifact-card">
+  <div class="artifact-card__body">
+    <div class="artifact-card__preview-container">
+      <img class="artifact-card__preview" [src]="artifact.preview.uri" alt="artifact-preview">
+    </div>
+
+    <div class="artifact-card__title">
+      <p>{{artifact.title}}</p>
+    </div>
+
+    <div class="artifact-card__more-info">
+      <p class="artifact-card__info-key">Тип предмета:</p>
+      <p class="artifact-card__info-value">{{typeTranslations[artifact.type]}}</p>
+
+      <p class="artifact-card__info-key">Категория ценности:</p>
+      <p class="artifact-card__info-value">{{valueTranslations[artifact.category]}}</p>
+    </div>
+  </div>
+</div>

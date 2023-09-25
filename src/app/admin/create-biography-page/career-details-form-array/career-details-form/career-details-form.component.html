@@ -1,0 +1,33 @@
+<form [formGroup]="subform" class="sub-form">
+  <input
+    class="admin-form__input"
+    type="text"
+    formControlName="placeOfService"
+    placeholder="Место службы*"
+  >
+
+  <input
+    class="admin-form__input"
+    type="text"
+    formControlName="position"
+    placeholder="Должность*"
+  >
+
+  <label>
+    Дата начала службы
+    <input
+      class="admin-form__input"
+      type="date"
+      formControlName="startDate"
+    >
+  </label>
+
+  <label>
+    Дата конца службы
+    <input
+      class="admin-form__input"
+      type="date"
+      formControlName="endDate"
+    >
+  </label>
+</form>

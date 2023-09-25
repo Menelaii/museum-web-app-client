@@ -1,0 +1,17 @@
+<form [formGroup]="subForm" class="sub-form">
+  <p class="sub-form__title">{{label}}</p>
+  <div class="sub-form__title-separator"></div>
+
+  <div class="sub-form__form-array" formArrayName="careerDetailsArray">
+    <div *ngFor="let control of formArrayController.getControls(); let i = index">
+      <app-career-details-form [subform]="control"></app-career-details-form>
+      <div class="sub-form__title-separator"></div>
+    </div>
+  </div>
+
+  <div class="admin-form__form-array-options">
+    <a (click)="formArrayController.addControl(); $event.stopPropagation();">+ Добавить</a>
+    <p>|</p>
+    <a (click)="formArrayController.removeLastControl()">- Убрать</a>
+  </div>
+</form>

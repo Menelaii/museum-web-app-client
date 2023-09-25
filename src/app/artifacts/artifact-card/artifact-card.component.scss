@@ -1,0 +1,76 @@
+@import "src/styles.scss";
+
+.artifact-card {
+  box-sizing: border-box;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: $color-white;
+  box-shadow: $box-shadow-1;
+  max-width: 100%;
+
+  font-family: 'Open-Sans', sans-serif;
+
+  &__preview-container {
+    height: 186px;
+    border-radius: 2px 2px 0 0;
+  }
+
+  &__preview {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__title {
+    padding: 14px 12px;
+    height: 108px;
+
+    color: $color-dark-blue;
+    font-size: 18px;
+    font-weight: 500;
+
+    max-width: 230px; //todo в % не работает
+
+    p {
+      margin: 0;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
+  }
+
+  &__more-info {
+    height: auto;
+    min-height: 145px;
+    border-top: 1px solid $color-gray;
+    background-color: #F8F9FA;
+    padding: 6px 12px;
+  }
+
+  &__info-key {
+    color: $color-black;
+    font-size: 16px;
+    font-weight: normal;
+
+    margin-bottom: 2px;
+  }
+
+  &__info-value {
+    color: #262728B0;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
+
+    padding-left: 5px;
+    margin-bottom: 4px;
+  }
+
+  &__info-value:last-child {
+    margin-bottom: 0;
+  }
+}

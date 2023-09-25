@@ -1,0 +1,29 @@
+<ng-container *ngIf="medalDetails">
+  <div class="medal-detailed-view info-card">
+    <div class="medal-detailed-view__img-holder">
+      <img class="" [src]="medalDetails.medal.image.uri" alt="img">
+    </div>
+
+    <table>
+      <tbody>
+      <tr>
+        <td class="info-card__key">Награда</td>
+        <td class="info-card__value">{{medalDetails.medal.title}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Описание награды</td>
+        <td class="info-card__value">{{medalDetails.medal.description}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Дата вручения</td>
+        <td class="info-card__value">{{medalDetails.dateOfAward | ruDate}}</td>
+      </tr>
+      <tr>
+        <td class="info-card__key">Место вручения</td>
+        <td class="info-card__value">{{medalDetails.placeOfAward}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+

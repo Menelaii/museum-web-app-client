@@ -1,0 +1,68 @@
+@import "src/styles.scss";
+
+@mixin pag-font() {
+  font-family: 'Open-Sans', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.pag-wrapper {
+  box-shadow: $box-shadow-1;
+  display: inline-block;
+  height: 100%;
+}
+
+._pagination {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin-bottom: 0;
+
+  &__item:hover:not(._pagination__item_active) {
+    background-color: #f2f2f2;
+  }
+
+  &__item {
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 7px 14px;
+    border: 1px solid $color-gray;
+    background-color: $color-white;
+    @include pag-font;
+    color: black;
+    user-select: none;
+
+    &_active {
+      border-color: $color-dark-blue;
+    }
+
+    &_active ._pagination__page-link {
+      @include pag-font;
+      color: $color-dark-blue;
+    }
+
+    &_disabled {
+      pointer-events: none;
+
+      a {
+        @include pag-font;
+        color: #7c8792;
+      }
+    }
+  }
+
+  &__page-link {
+    @include pag-font;
+    color: $color-black;
+  }
+
+  &__item:first-child {
+    border-radius: 6px 0 0 6px;
+  }
+
+  &__item:last-child {
+    border-radius: 0 6px 6px 0;
+  }
+}

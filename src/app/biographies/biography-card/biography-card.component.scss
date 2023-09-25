@@ -1,0 +1,39 @@
+@import "src/styles.scss";
+
+.biography-card {
+  width: 100%;
+  border-radius: 2px;
+  border: 1px solid $color-gray;
+  background: $color-white;
+  box-shadow: $box-shadow-1;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  font-family: 'Open-Sans', sans-serif;
+
+  &__body {
+    box-shadow: 0px -1px 0px 0px $color-gray inset;
+    padding: 20px 30px;
+
+    b {
+      font-weight: 600;
+    }
+  }
+
+  &__title {
+    color: $color-black;
+    font-size: 18px;
+    font-weight: 600;
+
+    margin-bottom: 10px;
+  }
+
+  &__info {
+    margin-bottom: 2px;
+
+    color: $color-black;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+

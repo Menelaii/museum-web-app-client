@@ -1,0 +1,31 @@
+<form [formGroup]="subform" class="sub-form">
+  <label class="custom-select">
+    Медаль*
+    <div class="custom-select__wrapper">
+      <select formControlName="medal">
+        <option
+          *ngFor="let medal of medals"
+          [value]="medal.id"
+        >
+          {{medal.title}}
+        </option>
+      </select>
+    </div>
+  </label>
+
+  <input
+    class="admin-form__input"
+    type="text"
+    formControlName="placeOfAward"
+    placeholder="Место награждения"
+  >
+
+  <label class="label">
+    Дата награждения
+    <input
+      class="admin-form__input"
+      type="date"
+      formControlName="dateOfAward"
+    >
+  </label>
+</form>

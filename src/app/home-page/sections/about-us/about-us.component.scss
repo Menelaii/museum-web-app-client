@@ -1,0 +1,90 @@
+@import "src/styles.scss";
+@import "src/app/home-page/home-page.component.scss";
+
+.about-us {
+  margin-bottom: 100px;
+
+  &__wrap {
+    width: 100%;
+
+    box-shadow: $box-shadow-1;
+    background-color: $color-white;
+    box-sizing: border-box;
+  }
+
+  &__header-wrap {
+    text-align: center;
+    padding: 24px 0;
+    border-bottom: 4px solid $color-dark-blue;
+
+    h1 {
+      font-family: 'Open-Sans', sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    margin-bottom: 26px;
+  }
+
+  &__body {
+    margin: 0 auto;
+    width: 77.464%;
+  }
+
+  &__text {
+    margin-bottom: 37px;
+
+    p {
+      color: rgba(38, 39, 40, 0.69);
+      text-align: justify;
+      font-family: 'Open-Sans', sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: normal;
+
+      margin-bottom: 20px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__video {
+    background-color: $color-gray;
+    height: 439px;
+    margin-bottom: 30px;
+  }
+
+  &__learn-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__learn-more-p {
+    color: $color-black;
+    text-align: center;
+    font-family: 'Playfair-Display', 'serif';
+    font-size: 22px;
+    font-weight: 500;
+
+    margin-bottom: 15px;
+  }
+
+  &__learn-more-button {
+    background-color: $color-dark-blue;
+    border: none;
+    padding: 15px 48px;
+
+    color: $color-white;
+    text-align: center;
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+
+    margin-bottom: 47px;
+  }
+}

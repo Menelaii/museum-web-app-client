@@ -1,0 +1,24 @@
+@import "src/styles.scss";
+@import "src/app/shared/styles/info-card.scss";
+
+.medal-detailed-view {
+  padding: 20px 10px;
+  border: 1px solid $color-gray;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &__img-holder {
+    display: flex;
+    justify-content: center;
+
+    max-height: 320px;
+    height: 100%;
+  }
+}

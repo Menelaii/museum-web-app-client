@@ -1,0 +1,9 @@
+<div *ngIf="error; else emptyError">
+  <p>{{error.url}}</p>
+  <p>{{error.message}}</p>
+  <p>{{error.status}}</p>
+</div>
+
+<ng-template #emptyError>
+  <p>Что-то пошло не так!</p>
+</ng-template>

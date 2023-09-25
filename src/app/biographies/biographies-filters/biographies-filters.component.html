@@ -1,0 +1,90 @@
+<form class="filters" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="filters__row filters__row_three-inputs">
+    <input class="filters__input" type="text" placeholder="Фамилия" formControlName="surname">
+    <input class="filters__input" type="text" placeholder="Имя" formControlName="name">
+    <input class="filters__input" type="text" placeholder="Отчество" formControlName="patronymic">
+
+    <button class="filters__submit" type="submit"
+            [disabled]="form.invalid || submitted">Поиск</button>
+  </div>
+
+  <a class="filters__collapse-a" (click)="isCollapsed = !isCollapsed"
+     [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+    Расширенный поиск
+  </a>
+  <hr class="filters__collapse-separator">
+  <div id="collapseBasic" [collapse]="isCollapsed">
+    <ng-container *ngIf="!isLoading && filterOptions; else spinner">
+      <div class="filters__row filters__row_select-line">
+        <label>
+          <p class="filters__row-label">Дата рождения</p>
+          <input class="filters__input" type="date" formControlName="dateOfBirth">
+        </label>
+
+        <label>
+          <p class="filters__row-label">Дата смерти</p>
+          <input class="filters__input" type="date" formControlName="dateOfDeath">
+        </label>
+      </div>
+
+      <div class="filters__row filters__row_select-line">
+
+        <label>
+          <input class="filters__input" type="text" placeholder="Место рождения" formControlName="placeOfBirth">
+        </label>
+
+
+        <label>
+          <input class="filters__input" type="text" placeholder="Место смерти" formControlName="placeOfDeath">
+        </label>
+      </div>
+
+      <div class="filters__row filters__row_select-line">
+        <label>
+          <p class="filters__row-label">Воинское звание</p>
+          <div class="filters__select-wrapper">
+            <select formControlName="militaryRank">
+              <option value="0">неизвестно</option>
+              <option *ngFor="let r of filterOptions.militaryRanks" [value]="r">{{r}}</option>
+            </select>
+          </div>
+        </label>
+
+        <label>
+          <p class="filters__row-label">Награда</p>
+          <div class="filters__select-wrapper">
+            <select formControlName="medal">
+              <option value="0">неизвестно</option>
+              <option *ngFor="let m of filterOptions.medals" [value]="m">{{m}}</option>
+            </select>
+          </div>
+        </label>
+      </div>
+
+      <div class="filters__row filters__row_select-line">
+        <label>
+          <p class="filters__row-label">Место службы</p>
+          <div class="filters__select-wrapper">
+            <select formControlName="placeOfService">
+              <option value="0">неизвестно</option>
+              <option *ngFor="let p of filterOptions.placesOfService" [value]="p">{{p}}</option>
+            </select>
+          </div>
+        </label>
+
+        <label>
+          <p class="filters__row-label">Место работы (учёбы)</p>
+          <input type="text" formControlName="placeOfEmployment">
+        </label>
+      </div>
+    </ng-container>
+  </div>
+</form>
+
+<ng-template #spinner>
+  <div class="spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+</ng-template>

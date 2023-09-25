@@ -1,0 +1,4 @@
+<div *ngIf="enabled" class="fullscreen-view fullscreen-view__container" (click)="close()">
+  <img [src]="selectedImage" alt="selected image" (click)="$event.stopPropagation()" />
+  <button class="fullscreen-view__close-button" (click)="close()">Закрыть</button>
+</div>

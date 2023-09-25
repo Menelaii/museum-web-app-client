@@ -1,0 +1,26 @@
+<div class="news-short-card">
+  <div class="news-short-card__img-container">
+    <img [src]="model.preview.uri" alt="preview">
+  </div>
+
+  <div class="news-short-card__body">
+    <p class="news-short-card__title">
+      {{model.title}}
+    </p>
+
+    <div class="news-short-card__date-line">
+      <svg class="news-short-card__date-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <g clip-path="url(#clip0_552_1430)">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.10263 3.22742C1.10263 2.59746 1.62519 2.08676 2.27195 2.08676H16.1924C16.8382 2.08676 17.3617 2.59652 17.3617 3.22742V16.8067C17.3617 17.4367 16.8392 17.9474 16.1924 17.9474H2.27195C1.62615 17.9474 1.10263 17.4376 1.10263 16.8067V3.22742ZM2.26399 6.61837H16.2003V16.8145H2.26399V6.61837ZM4.58672 1.52031C4.58672 1.20747 4.83529 0.953857 5.17284 0.953857H6.32332C6.64703 0.953857 6.90944 1.21662 6.90944 1.52031V2.08676H4.58672V1.52031ZM11.5549 1.52031C11.5549 1.20747 11.8035 0.953857 12.141 0.953857H13.2915C13.6152 0.953857 13.8776 1.21662 13.8776 1.52031V2.08676H11.5549V1.52031Z" fill="#262728" fill-opacity="0.69"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_552_1430">
+            <rect width="17.4204" height="16.9935" fill="white" transform="translate(0.521515 0.953857)"/>
+          </clipPath>
+        </defs>
+      </svg>
+
+      <p class="news-short-card__date">{{model.publishDate | date:'dd.MM.yyyy'}}</p>
+    </div>
+  </div>
+</div>

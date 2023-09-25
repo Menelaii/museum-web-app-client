@@ -1,0 +1,24 @@
+<form [formGroup]="subform" class="sub-form">
+  <label class="custom-select">
+    Звание*
+    <div class="custom-select__wrapper">
+      <select formControlName="rank">
+        <option
+          *ngFor="let rank of ranks"
+          [value]="rank.id"
+        >
+          {{rank.title}}
+        </option>
+      </select>
+    </div>
+  </label>
+
+  <label>
+    Дата назначения
+    <input
+      class="admin-form__input"
+      type="date"
+      formControlName="dateOfAssigment"
+    >
+  </label>
+</form>

@@ -1,0 +1,50 @@
+@import "src/styles.scss";
+
+@mixin breadcrumb-inactive() {
+  color: $color-nav-inactive;
+  font-family: 'Open-Sans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0.28px;
+  text-decoration: none;
+  margin-right: 4px;
+}
+
+.breadcrumb {
+  width: 70.4861%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+
+  &__logo {
+    margin-right: 4px;
+  }
+
+  &__item {
+    display: inline-block;
+    margin-right: 4px;
+
+    &_active {
+      color: $color-black;
+    }
+
+    a {
+      @include breadcrumb-inactive;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &::after {
+      content: ">";
+      @include breadcrumb-inactive;
+    }
+
+    &:last-child::after {
+      content: none;
+    }
+  }
+}
