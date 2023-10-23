@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {TokenStorageService} from "./token-storage.service";
 import {Observable} from "rxjs";
 import {ArtifactDTO} from "../interfaces/artifacts/artifact.dto";
@@ -10,18 +10,17 @@ import {ArticlesSearchCriteria} from "../interfaces/news/articles-search-criteri
 import {ArticleShortDTO} from "../interfaces/news/article-short.dto";
 import {ArticleDTO} from "../interfaces/news/article.dto";
 import {ArticleUploadDTO} from "../interfaces/news/article-upload.dto";
-import {Creator} from "../interfaces/creator";
+import {CreatorWithOneFile} from "../interfaces/service/creator-with-one-file";
+import {Remover} from "../interfaces/service/remover";
+import {OneFileEntityService} from "../interfaces/service/one-file-entity-service";
 
 @Injectable()
-export class ArticlesService implements Creator<ArticleUploadDTO> {
+export class ArticlesService implements OneFileEntityService<ArticleDTO, ArticleUploadDTO> {
+
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
   ) {}
-
-  getAll(): Observable<ArtifactDTO[]> {
-    return this.http.get<ArtifactDTO[]>(environment.ARTIFACTS_URL);
-  }
 
   getLatest(page: XPage) {
     const queryParams: any = { ...page };
@@ -34,11 +33,11 @@ export class ArticlesService implements Creator<ArticleUploadDTO> {
   getAllWithFilters(page: XPage, searchCriteria: ArticlesSearchCriteria): Observable<PageDTO<ArticleShortDTO>> {
     const queryParams: any = { ...page };
 
-    if (searchCriteria.year !== null) {
+    if (searchCriteria.year) {
       queryParams.year = searchCriteria.year;
     }
 
-    if (searchCriteria.month !== null) {
+    if (searchCriteria.month) {
       queryParams.month = searchCriteria.month;
     }
 
@@ -69,5 +68,21 @@ export class ArticlesService implements Creator<ArticleUploadDTO> {
 
   getById(id: number): Observable<ArticleDTO> {
     return this.http.get<ArticleDTO>(`${environment.ARTICLES_URL}/${id}`);
+  }
+
+  edit(id: number, uploadDTO: ArticleUploadDTO): Observable<HttpResponse<any>> {
+    return this.http.patch<HttpResponse<any>>(
+      `${environment.ARTICLES_URL}/${id}`,
+      uploadDTO,
+      { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
+    );
+  }
+
+  changePreview(id: number, preview: File): Observable<HttpResponse<any>> {
+    return this.http.patch(
+      `${environment.ARTICLES_URL}/${id}/preview`,
+      preview,
+      { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
+    );
   }
 }

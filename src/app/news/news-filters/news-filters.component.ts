@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Months} from "../../shared/enums/months";
 import {monthTranslations} from "../../shared/enums/months-translations";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,6 +9,8 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./news-filters.component.scss']
 })
 export class NewsFiltersComponent implements OnInit {
+  @ViewChild('monthSelect', { static: false }) monthSelectElement!: ElementRef;
+
   initialYear = 2023;
   currentYear = new Date().getFullYear();
   years: number[] = []
@@ -42,7 +44,9 @@ export class NewsFiltersComponent implements OnInit {
     textTransform: 'uppercase',
   };
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private renderer: Renderer2) {
     for (let year = this.initialYear; year <= this.currentYear; year++) {
       this.years.push(year);
     }
@@ -52,7 +56,6 @@ export class NewsFiltersComponent implements OnInit {
     const params = this.route.snapshot.queryParams;
     this.selectedYear = params['year'] ?? this.selectedYear;
     this.selectedMonth = params['month'] ?? this.selectedMonth;
-    this.resizeSelect();
   }
 
   onMonthChange() {
@@ -94,19 +97,18 @@ export class NewsFiltersComponent implements OnInit {
     return 0;
   }
 
-  resizeSelect(width: number | undefined = undefined) {
-    const selectedOption = document.querySelector(
-      '.news-filters__select-wrapper select option:checked'
-    ) as HTMLOptionElement;
-
-    const select = document.querySelector(
-      '.news-filters__select-wrapper select'
-    ) as HTMLSelectElement;
-
+  resizeSelect(width: number | undefined = undefined): void {
+    const selectedOption = this.monthSelectElement.nativeElement.querySelector('option:checked');
+    const select = this.monthSelectElement.nativeElement;
     if (selectedOption) {
-      select.style.width = `${(this.getWidthOfString(selectedOption.label, this.selectStyles)) * this.symbolScale}px`;
+      this.renderer.setStyle(select, 'width', `${(this.getWidthOfString(selectedOption.label, this.selectStyles)) * this.symbolScale}px`);
     } else if (width) {
-      select.style.width = `${width * this.symbolScale}px`;
+      this.renderer.setStyle(select, 'width', `${width * this.symbolScale}px`);
     }
+  }
+
+  getSelectedMonth() {
+    let tra = this.months.filter((value) => value.value == this.selectedMonth).at(0);
+    return tra ? tra.translation :  '';
   }
 }

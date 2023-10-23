@@ -24,14 +24,6 @@
     </div>
   </label>
 
-  <input
-    *ngIf="actionIsNotCreate()"
-    [(ngModel)]="selectedId"
-    class="admin-form__input"
-    type="number"
-    placeholder="идентификатор* (число в адресе /biographies/{идентификатор})"
-  >
-
   <label class="custom-select">
     Выберите сущность:
     <div class="custom-select__wrapper">
@@ -44,7 +36,6 @@
 
   <button
     class="admin-form__button"
-    [disabled]="!isValid()"
     (click)="navigate()"
   >
     Перейти

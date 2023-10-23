@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import transformJavaScript
-  from "@angular-devkit/build-angular/src/builders/browser-esbuild/javascript-transformer-worker";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +9,6 @@ import transformJavaScript
 export class DashboardComponent implements OnInit {
   selectedAction: string = 'new';
   selectedEntity: string = 'biographies';
-  selectedId: number | null = null;
 
   actions = [
     { label: 'Создать', value: 'new' },
@@ -38,24 +35,10 @@ export class DashboardComponent implements OnInit {
   }
 
   navigate(): void {
-    const fragments = ['/admin', this.selectedEntity, this.selectedAction]
-
-    if (this.actionIsNotCreate()) {
-      if (!this.selectedId) {
-        return;
-      }
-
-      fragments.push(this.selectedId.toString());
-    }
-
-    this.router.navigate(fragments);
-  }
-
-  actionIsNotCreate(): boolean {
-    return this.selectedAction !== 'new';
-  }
-
-  isValid(): boolean {
-    return !this.actionIsNotCreate() || this.selectedId !== null;
+    this.router.navigate([
+      '/admin',
+      this.selectedEntity,
+      this.selectedAction
+    ]);
   }
 }

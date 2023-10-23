@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {TokenStorageService} from "./token-storage.service";
 import {Observable} from "rxjs";
 import {ArtifactDTO} from "../interfaces/artifacts/artifact.dto";
@@ -9,9 +9,11 @@ import {XPage} from "../interfaces/pagination/x-page";
 import {ArtifactsSearchCriteria} from "../interfaces/artifacts/artifacts-search-criteria";
 import {PageDTO} from "../interfaces/pagination/page.dto";
 import {ArtifactShortDTO} from "../interfaces/artifacts/artifact-short.dto";
+import {MultipleFilesEntityService} from "../interfaces/service/multiple-files-entity-service";
 
 @Injectable()
-export class ArtifactsService {
+export class ArtifactsService implements MultipleFilesEntityService<ArtifactDTO, ArtifactUploadDTO> {
+
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
@@ -24,15 +26,15 @@ export class ArtifactsService {
   getAllWithFilters(page: XPage, searchCriteria: ArtifactsSearchCriteria): Observable<PageDTO<ArtifactShortDTO>> {
     const queryParams: any = { ...page }
 
-    if (searchCriteria.title !== null) {
+    if (searchCriteria.title) {
       queryParams.title = searchCriteria.title;
     }
 
-    if (searchCriteria.artifactType !== null) {
+    if (searchCriteria.artifactType) {
       queryParams.artifactType = searchCriteria.artifactType;
     }
 
-    if (searchCriteria.valueCategory !== null) {
+    if (searchCriteria.valueCategory) {
       queryParams.valueCategory = searchCriteria.valueCategory;
     }
 
@@ -69,5 +71,48 @@ export class ArtifactsService {
 
   getById(id: number): Observable<ArtifactDTO> {
     return this.http.get<ArtifactDTO>(`${environment.ARTIFACTS_URL}/${id}`);
+  }
+
+  deleteImage(artifactId: number, imageId: number): Observable<HttpResponse<any>> {
+    return this.http.delete(
+      `${environment.ARTIFACTS_URL}/${artifactId}/images/${imageId}`,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
+  }
+
+  edit(id: number, uploadDTO: ArtifactUploadDTO): Observable<HttpResponse<any>> {
+    return this.http.patch(
+      `${environment.ARTIFACTS_URL}/${id}`,
+      uploadDTO,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
+  }
+
+  addImage(id: number, image: File, isPreview: boolean): Observable<HttpResponse<any>> {
+    return this.http.post(
+      `${environment.ARTIFACTS_URL}/${id}/images?isPreview=${isPreview}`,
+      image,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
+  }
+
+  changePreview(id: number, imageId: number): Observable<HttpResponse<any>> {
+    return this.http.patch(
+      `${environment.ARTIFACTS_URL}/${id}/preview?imageId=${imageId}`,
+      null,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
   }
 }

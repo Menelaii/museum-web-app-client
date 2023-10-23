@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {TokenStorageService} from "./token-storage.service";
 import {Observable} from "rxjs";
 import {BiographyDTO} from "../interfaces/biographies/biography.dto";
@@ -9,62 +9,59 @@ import {BiographyShortDTO} from "../interfaces/biographies/biography-short.dto";
 import {XPage} from "../interfaces/pagination/x-page";
 import {BiographiesSearchCriteria} from "../interfaces/biographies/biographies-search-criteria";
 import {PageDTO} from "../interfaces/pagination/page.dto";
+import {MultipleFilesEntityService} from "../interfaces/service/multiple-files-entity-service";
 
 @Injectable()
-export class BiographiesService {
+export class BiographiesService implements MultipleFilesEntityService<BiographyDTO, BiographyUploadDTO> {
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
   ) {}
 
-  getAll(): Observable<BiographyShortDTO[]> {
-    return this.http.get<BiographyShortDTO[]>(environment.BIOGRAPHIES_URL);
-  }
-
   getAllWithFilters(page: XPage, searchCriteria: BiographiesSearchCriteria): Observable<PageDTO<BiographyShortDTO>> {
     const queryParams: any = { ...page };
 
-    if (searchCriteria.surname !== null) {
+    if (searchCriteria.surname) {
       queryParams.surname = searchCriteria.surname;
     }
 
-    if (searchCriteria.name !== null) {
+    if (searchCriteria.name) {
       queryParams.name = searchCriteria.name;
     }
 
-    if (searchCriteria.patronymic !== null) {
+    if (searchCriteria.patronymic) {
       queryParams.patronymic = searchCriteria.patronymic;
     }
 
-    if (searchCriteria.dateOfBirth !== null) {
+    if (searchCriteria.dateOfBirth) {
       queryParams.dateOfBirth = searchCriteria.dateOfBirth;
     }
 
-    if (searchCriteria.dateOfDeath !== null) {
+    if (searchCriteria.dateOfDeath) {
       queryParams.dateOfDeath = searchCriteria.dateOfDeath;
     }
 
-    if (searchCriteria.placeOfBirth !== null) {
+    if (searchCriteria.placeOfBirth) {
       queryParams.placeOfBirth = searchCriteria.placeOfBirth;
     }
 
-    if (searchCriteria.placeOfDeath !== null) {
+    if (searchCriteria.placeOfDeath) {
       queryParams.placeOfDeath = searchCriteria.placeOfDeath;
     }
 
-    if (searchCriteria.militaryRank !== null) {
+    if (searchCriteria.militaryRank) {
       queryParams.militaryRank = searchCriteria.militaryRank;
     }
 
-    if (searchCriteria.medal !== null) {
+    if (searchCriteria.medal) {
       queryParams.medal = searchCriteria.medal;
     }
 
-    if (searchCriteria.placeOfService !== null) {
+    if (searchCriteria.placeOfService) {
       queryParams.placeOfService = searchCriteria.placeOfService;
     }
 
-    if (searchCriteria.placeOfEmployment !== null) {
+    if (searchCriteria.placeOfEmployment) {
       queryParams.placeOfEmployment = searchCriteria.placeOfEmployment;
     }
 
@@ -78,8 +75,10 @@ export class BiographiesService {
   }
 
   create(biographyUploadDTO: BiographyUploadDTO,
-         images: File[], presentation: File,
-         preview: File): Observable<HttpResponse<any>> {
+         images: File[] | null,
+         preview: File,
+         options: {presentation?: File | null} = {}
+  ): Observable<HttpResponse<any>> {
     const formData = new FormData();
 
     formData.append('biography', new Blob([JSON.stringify(biographyUploadDTO)], {
@@ -94,8 +93,8 @@ export class BiographiesService {
       });
     }
 
-    if (presentation) {
-      formData.append('presentation', presentation);
+    if (options.presentation) {
+      formData.append('presentation', options.presentation, options.presentation.name);
     }
 
     return this.http.post<HttpResponse<any>>(environment.BIOGRAPHIES_URL, formData, {
@@ -109,5 +108,59 @@ export class BiographiesService {
       headers: this.tokenStorageService.getAuthHeader(),
       observe: 'response',
     });
+  }
+
+  edit(id: number, uploadDTO: BiographyUploadDTO): Observable<HttpResponse<any>> {
+    return this.http.patch(
+      `${environment.BIOGRAPHIES_URL}/${id}`,
+      uploadDTO,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
+  }
+
+  addImage(id: number, image: File, isPreview: boolean): Observable<HttpResponse<any>> {
+    return this.http.post(
+      `${environment.BIOGRAPHIES_URL}/${id}/images?isPreview=${isPreview}`,
+      image,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
+  }
+
+  editPresentation(id: number, presentation: File): Observable<HttpResponse<any>> {
+    return this.http.patch(
+      `${environment.BIOGRAPHIES_URL}/${id}/presentation`,
+      presentation,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response',
+      }
+    );
+  }
+
+  changePreview(id: number, imageId: number): Observable<HttpResponse<any>> {
+    return this.http.patch(
+      `${environment.BIOGRAPHIES_URL}/${id}/preview?imageId=${imageId}`,
+      null,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
+  }
+
+  deleteImage(biographyId: number, imageId: number): Observable<HttpResponse<any>> {
+    return this.http.delete(
+      `${environment.BIOGRAPHIES_URL}/${biographyId}/images/${imageId}`,
+      {
+        headers: this.tokenStorageService.getAuthHeader(),
+        observe: 'response'
+      }
+    );
   }
 }

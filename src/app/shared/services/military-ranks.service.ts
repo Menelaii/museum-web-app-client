@@ -5,10 +5,11 @@ import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment.dev";
 import {TokenStorageService} from "./token-storage.service";
 import {MilitaryRankUploadDTO} from "../interfaces/military-ranks/military-rank-upload.dto";
-import {Creator} from "../interfaces/creator";
+import {OneFileEntityService} from "../interfaces/service/one-file-entity-service";
 
 @Injectable()
-export class MilitaryRanksService implements Creator<MilitaryRankUploadDTO>{
+export class MilitaryRanksService implements OneFileEntityService<MilitaryRankDTO, MilitaryRankUploadDTO>{
+
   constructor(
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
@@ -16,6 +17,10 @@ export class MilitaryRanksService implements Creator<MilitaryRankUploadDTO>{
 
   getAll(): Observable<MilitaryRankDTO[]> {
     return this.http.get<MilitaryRankDTO[]>(environment.MILITARY_RANKS_URL);
+  }
+
+  getById(id: number): Observable<MilitaryRankDTO> {
+    return this.http.get<MilitaryRankDTO>(`${environment.MILITARY_RANKS_URL}/${id}`);
   }
 
   create(militaryRankUploadDTO: MilitaryRankUploadDTO, image: File): Observable<HttpResponse<any>> {
@@ -40,5 +45,21 @@ export class MilitaryRanksService implements Creator<MilitaryRankUploadDTO>{
       headers: headers,
       observe: 'response'
     });
+  }
+
+  edit(id: number, uploadDTO: MilitaryRankUploadDTO): Observable<HttpResponse<any>> {
+    return this.http.patch<HttpResponse<any>>(
+      `${environment.MILITARY_RANKS_URL}/${id}`,
+      uploadDTO,
+      { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
+    );
+  }
+
+  changePreview(id: number, image: File): Observable<HttpResponse<any>> {
+    return this.http.patch(
+      `${environment.MILITARY_RANKS_URL}/${id}/preview`,
+      image,
+      { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
+    );
   }
 }

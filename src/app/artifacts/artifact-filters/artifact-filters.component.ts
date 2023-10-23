@@ -53,11 +53,11 @@ export class ArtifactFiltersComponent {
       }).then(() => this.submitted = false);
   }
 
-  getValueOrDefault(str: string | null) {
+  getValueOrDefault(str: string | null | undefined) {
     return (!str || str.trim().length == 0 || str === '0') ? null : str;
   }
 
-  getEnumValueOrDefault(value: ValueCategory | ArtifactType | null) {
-    return (value === null || value as number == 0) ? null : value;
+  getEnumValueOrDefault(value: ValueCategory | ArtifactType | null | undefined) {
+    return (!value || value as number == 0) ? null : value;
   }
 }

@@ -2,7 +2,7 @@
   <div class="news-filters__control">
     <p class="news-filters__row-label">Месяц:</p>
     <div class="news-filters__select-wrapper">
-      <select [(ngModel)]="selectedMonth" (change)="onMonthChange()">
+      <select #monthSelect [style.width]="getWidthOfString(getSelectedMonth(), selectStyles) * symbolScale + 'px'" [(ngModel)]="selectedMonth" (change)="onMonthChange()">
         <option *ngFor="let month of months" [value]="month.value"
                 [selected]="selectedMonth === month.value">{{month.translation}}</option>
       </select>

@@ -1,0 +1,7 @@
+<div class="confirmation-message-box" *ngIf="enabled" (click)="onButtonClick(false)">
+  <div class="confirmation-message-box__wrap" (click)="$event.stopPropagation()">
+    <p>{{message}}</p>
+    <button (click)="onButtonClick(true)">Да</button>
+    <button (click)="onButtonClick(false)">Нет</button>
+  </div>
+</div>

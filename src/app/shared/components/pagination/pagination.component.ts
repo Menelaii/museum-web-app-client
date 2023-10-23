@@ -13,7 +13,6 @@ export class PaginationComponent implements OnChanges {
   @Input() itemsPerPage: number = 1;
   @Input() totalElements: number = 0;
 
-  anchorElement: HTMLElement | null = null;
   pages: number[] = [];
 
   constructor(private route: ActivatedRoute,

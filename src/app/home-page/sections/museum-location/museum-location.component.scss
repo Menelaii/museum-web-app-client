@@ -1,0 +1,28 @@
+@import "src/styles.scss";
+@import "src/app/shared/styles/home-page-section.scss";
+@import "src/app/shared/styles/spinner.scss";
+
+.museum-location {
+  &__map {
+    margin-bottom: 20px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p {
+      font-family: 'Open-Sans', sans-serif;
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: $color-black;
+    }
+  }
+
+  a {
+    font-family: 'Open-Sans', sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+  }
+}

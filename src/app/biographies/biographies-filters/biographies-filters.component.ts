@@ -87,7 +87,7 @@ export class BiographiesFiltersComponent implements OnDestroy {
       }).then(() => this.submitted = false);
   }
 
-  getValueOrDefault(str: string | null) {
+  getValueOrDefault(str: string | null | undefined) {
     return (!str || str.trim().length == 0 || str === '0') ? null : str;
   }
 }

@@ -6,7 +6,6 @@ export abstract class UploadForm<S, U> {
   error = false;
   isSubmitted = false;
   form: FormGroup;
-  selectedFile: File | null = null;
   service: S;
 
   protected constructor() {
@@ -15,7 +14,7 @@ export abstract class UploadForm<S, U> {
   }
 
   onSubmit() {
-    if (this.isSubmitted || this.form.invalid || !this.selectedFile) {
+    if (this.isSubmitted || this.form.invalid) {
       return;
     }
 
@@ -23,8 +22,7 @@ export abstract class UploadForm<S, U> {
 
     const observer: Observer<HttpResponse<any>> = {
       complete: () =>  {
-        this.selectedFile = null;
-        this.form.reset();
+        this.onComplete();
       },
       error: (err: any) => {
         this.error = true;
@@ -36,16 +34,11 @@ export abstract class UploadForm<S, U> {
       }
     }
 
-    this.create().subscribe(observer);
+    this.submit().subscribe(observer);
   }
 
-  onFileChanged($event: Event) {
-    const input = $event.target as HTMLInputElement;
-    if (!input.files) {
-      return;
-    }
-
-    this.selectedFile = input.files[0] as File;
+  onComplete() {
+    this.form.reset();
   }
 
   abstract formValuesToUploadDTO() : U;
@@ -54,5 +47,5 @@ export abstract class UploadForm<S, U> {
 
   abstract getService(): S;
 
-  abstract create(): Observable<HttpResponse<any>>
+  abstract submit(): Observable<HttpResponse<any>>
 }

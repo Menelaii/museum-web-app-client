@@ -16,6 +16,7 @@ import {ErrorPageComponent} from "./error-page/error-page.component";
 import {TooltipModule} from "ngx-bootstrap/tooltip";
 import {CarouselModule} from "ngx-bootstrap/carousel";
 import {CollapseModule} from "ngx-bootstrap/collapse";
+import { MuseumLocationComponent } from './home-page/sections/museum-location/museum-location.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {CollapseModule} from "ngx-bootstrap/collapse";
     MuseumOnlineComponent,
     LastNewsComponent,
     ErrorPageComponent,
+    MuseumLocationComponent,
   ],
   imports: [
     BrowserModule,
