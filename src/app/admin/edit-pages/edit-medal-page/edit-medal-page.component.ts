@@ -13,12 +13,16 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class EditMedalPageComponent extends EditForm<MedalDTO, MedalUploadDTO, MedalsService> {
 
-  constructor(private route: ActivatedRoute) {
-    super(route);
+  constructor() {
+    super();
   }
 
   getService(): MedalsService {
     return inject(MedalsService);
+  }
+
+  getActivatedRoute(): ActivatedRoute {
+    return inject(ActivatedRoute);
   }
 
   formValuesToUploadDTO(): MedalUploadDTO {

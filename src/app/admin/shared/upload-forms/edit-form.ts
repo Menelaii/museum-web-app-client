@@ -9,9 +9,9 @@ export abstract class EditForm<E, U, S extends Editor<E, U>> extends UploadForm<
     isLoading = true;
     entityId: number;
 
-    constructor(route: ActivatedRoute) {
+    constructor() {
         super();
-        this.entityId = route.snapshot.params['id'];
+        this.entityId = this.getActivatedRoute().snapshot.params['id'];
         this.service.getById(this.entityId).subscribe(value => {
             this.existingEntity = value;
             this.isLoading = false;
@@ -31,4 +31,6 @@ export abstract class EditForm<E, U, S extends Editor<E, U>> extends UploadForm<
             });
         }
     }
+
+    abstract getActivatedRoute(): ActivatedRoute;
 }
