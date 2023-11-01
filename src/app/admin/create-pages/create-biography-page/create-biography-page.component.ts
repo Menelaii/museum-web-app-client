@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {MultipleFileUploadForm} from "../../shared/upload-forms/multiple-file-upload-form";
+import {MultipleFilesEntityUploadForm} from "../../shared/upload-forms/create-forms/multiple-files-entity-upload-form";
 import {BiographiesService} from "../../../shared/services/biographies.service";
 import {BiographyUploadDTO} from "../../../shared/interfaces/biographies/biography-upload.dto";
 import {Observable} from "rxjs";
@@ -17,7 +17,7 @@ import {CareerDetailsDTO} from "../../../shared/interfaces/details/career-detail
   templateUrl: './create-biography-page.component.html',
   styleUrls: ['./create-biography-page.component.scss']
 })
-export class CreateBiographyPageComponent extends MultipleFileUploadForm<BiographiesService, BiographyUploadDTO> {
+export class CreateBiographyPageComponent extends MultipleFilesEntityUploadForm<BiographiesService, BiographyUploadDTO> {
   medals: MedalShortDTO[] = [];
   ranks: MilitaryRankShortDTO[] = [];
   isOptionsLoading = true;

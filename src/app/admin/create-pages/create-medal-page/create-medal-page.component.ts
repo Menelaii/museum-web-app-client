@@ -2,14 +2,14 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MedalsService} from "../../../shared/services/medals.service";
 import {MedalUploadDTO} from "../../../shared/interfaces/medals/medal-upload.dto";
-import {OneFileUploadForm} from "../../shared/upload-forms/one-file-upload-form";
+import {OneFileEntityUploadForm} from "../../shared/upload-forms/create-forms/one-file-entity-upload-form";
 
 @Component({
   selector: 'app-create-medal-page',
   templateUrl: './create-medal-page.component.html',
   styleUrls: ['./create-medal-page.component.scss']
 })
-export class CreateMedalPageComponent extends OneFileUploadForm<MedalsService, MedalUploadDTO> {
+export class CreateMedalPageComponent extends OneFileEntityUploadForm<MedalsService, MedalUploadDTO> {
   getService(): MedalsService {
     return inject(MedalsService);
   }

@@ -1,0 +1,36 @@
+<div class="sub-form" *ngIf="isInitialized; else spinner">
+  <p class="sub-form__title">Добавить фотографию</p>
+
+  <form [formGroup]="form" class="sub-form">
+    <label>
+      Это превью
+      <input
+        class="admin-form__input"
+        type="checkbox"
+        formControlName="isPreview"
+      >
+    </label>
+
+    <input
+      class="admin-form__input_file form-control"
+      type="file"
+      (change)="onFileChanged($event)"
+    >
+
+    <button
+      type="submit" class="admin-form__button"
+      (click)="submit()"
+      [disabled]="!isValid()"
+    >
+      Добавить картинку превью
+    </button>
+  </form>
+</div>
+
+<ng-template #spinner>
+  <div class="spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+</ng-template>

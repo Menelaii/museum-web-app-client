@@ -2,14 +2,14 @@ import {Component, inject} from '@angular/core';
 import {MilitaryRanksService} from "../../../shared/services/military-ranks.service";
 import {MilitaryRankUploadDTO} from "../../../shared/interfaces/military-ranks/military-rank-upload.dto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {OneFileUploadForm} from "../../shared/upload-forms/one-file-upload-form";
+import {OneFileEntityUploadForm} from "../../shared/upload-forms/create-forms/one-file-entity-upload-form";
 
 @Component({
   selector: 'app-create-rank-page',
   templateUrl: './create-rank-page.component.html',
   styleUrls: ['./create-rank-page.component.scss']
 })
-export class CreateRankPageComponent extends OneFileUploadForm<MilitaryRanksService, MilitaryRankUploadDTO> {
+export class CreateRankPageComponent extends OneFileEntityUploadForm<MilitaryRanksService, MilitaryRankUploadDTO> {
   getService(): MilitaryRanksService {
     return inject(MilitaryRanksService);
   }

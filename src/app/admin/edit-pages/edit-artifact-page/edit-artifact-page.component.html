@@ -12,44 +12,69 @@
 
     <li class="breadcrumb__item">
       <a [routerLink]="['/admin/dashboard']"
-         [queryParams]="{entity: 'medals'}">
-        Награды
+         [queryParams]="{entity: 'artifacts'}">
+        Предметы
       </a>
     </li>
 
-    <li class="breadcrumb__item breadcrumb__item_active">Редактирование награды</li>
+    <li class="breadcrumb__item breadcrumb__item_active">Создание нового предмета</li>
   </ol>
 </nav>
 
-<form class="admin-form admin-form_small" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <h1 class="admin-form__header">Редактирование награды</h1>
+<form class="admin-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="admin-form__header">Создание нового предмета</h1>
 
   <ng-container *ngIf="!isSubmitted && !isLoading; else spinner">
     <input
       class="admin-form__input"
       type="text"
       formControlName="title"
-      placeholder="Название награды*"
+      placeholder="Название*"
     >
 
-    <input
-      class="admin-form__input"
-      type="text"
-      formControlName="description"
-      placeholder="Описание награды"
-    >
+    <label>
+      Период создания
+      <input
+        class="admin-form__input"
+        type="date"
+        formControlName="creationPeriod"
+      >
+    </label>
+
+    <label>
+      Тип предмета*
+      <div class="admin-form__select-wrapper">
+        <select formControlName="artifactType">
+          <option
+            *ngFor="let type of enumTranslator.getTypes()"
+            [value]="type.value">{{type.translation}}
+          </option>
+        </select>
+      </div>
+    </label>
+
+    <label>
+      Категория ценности*
+      <div class="admin-form__select-wrapper">
+        <select formControlName="valueCategory">
+          <option
+            *ngFor="let valueCategory of enumTranslator.getValueCategories()"
+            [value]="valueCategory.value">{{valueCategory.translation}}
+          </option>
+        </select>
+      </div>
+    </label>
 
     <p class="admin-form__error" *ngIf="error">ошибка</p>
-    <input type="submit" class="admin-form__button admin-form__button_mb" [disabled]="form.invalid || isSubmitted">
+    <input type="submit" class="admin-form__button" [disabled]="form.invalid || isSubmitted">
 
     <div class="admin-form__form-array-options">
-      <a (click)="onPreviewChangerCollapseClick()">+- Поменять превью</a>
+      <a (click)="onImageEditorCollapseClick()">+- Редактировать вложения</a>
     </div>
-    <div id="collapseBasic" [collapse]="isPreviewChangerCollapsed" style="width: 100%;">
-      <app-one-file-entity-image-editor></app-one-file-entity-image-editor>
+    <div id="collapseBasic" [collapse]="isImageEditorCollapsed" style="width: 100%;">
+      <app-multiple-files-entity-image-editor></app-multiple-files-entity-image-editor>
     </div>
   </ng-container>
-
 </form>
 
 <ng-template #spinner>

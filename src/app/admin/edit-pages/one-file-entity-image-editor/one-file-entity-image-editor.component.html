@@ -1,0 +1,30 @@
+<div class="sub-form" *ngIf="isInitialized && !isLoading; else spinner">
+  <p class="sub-form__title">Текущее превью</p>
+
+  <ng-container *ngIf="existingPreview">
+    <img [src]="existingPreview.uri" alt="preview">
+  </ng-container>
+
+  <p class="sub-form__title">Загрузить новое</p>
+  <input
+    class="admin-form__input_file form-control"
+    type="file"
+    (change)="onFileChanged($event)"
+  >
+
+  <button
+    type="submit" class="admin-form__button"
+    (click)="changePreview()"
+    [disabled]="!isValid()"
+  >
+    Поменять превью
+  </button>
+</div>
+
+<ng-template #spinner>
+  <div class="spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+</ng-template>

@@ -77,12 +77,4 @@ export class ArticlesService implements OneFileEntityService<ArticleDTO, Article
       { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
     );
   }
-
-  changePreview(id: number, preview: File): Observable<HttpResponse<any>> {
-    return this.http.patch(
-      `${environment.ARTICLES_URL}/${id}/preview`,
-      preview,
-      { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
-    );
-  }
 }

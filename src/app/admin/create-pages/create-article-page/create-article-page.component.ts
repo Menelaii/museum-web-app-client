@@ -2,14 +2,14 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ArticleUploadDTO} from "../../../shared/interfaces/news/article-upload.dto";
 import {ArticlesService} from "../../../shared/services/articles.service";
-import {OneFileUploadForm} from "../../shared/upload-forms/one-file-upload-form";
+import {OneFileEntityUploadForm} from "../../shared/upload-forms/create-forms/one-file-entity-upload-form";
 
 @Component({
   selector: 'app-create-article-page',
   templateUrl: './create-article-page.component.html',
   styleUrls: ['./create-article-page.component.scss']
 })
-export class CreateArticlePageComponent extends OneFileUploadForm<ArticlesService, ArticleUploadDTO> {
+export class CreateArticlePageComponent extends OneFileEntityUploadForm<ArticlesService, ArticleUploadDTO> {
 
   getService(): ArticlesService {
     return inject(ArticlesService);

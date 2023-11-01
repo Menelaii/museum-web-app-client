@@ -54,12 +54,4 @@ export class MilitaryRanksService implements OneFileEntityService<MilitaryRankDT
       { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
     );
   }
-
-  changePreview(id: number, image: File): Observable<HttpResponse<any>> {
-    return this.http.patch(
-      `${environment.MILITARY_RANKS_URL}/${id}/preview`,
-      image,
-      { headers: this.tokenStorageService.getAuthHeader(), observe: 'response' }
-    );
-  }
 }

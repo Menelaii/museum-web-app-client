@@ -129,6 +129,12 @@
       </div>
     </label>
 
+    <div class="admin-form__form-array-options">
+      <a (click)="addControl(); $event.stopPropagation();">+ Добавить фото</a>
+      <p>|</p>
+      <a (click)="removeLastControl()">- Убрать фото</a>
+    </div>
+
     <label>
       Презентация
       <input
@@ -139,12 +145,6 @@
         (change)="onPresentationChanged($event)"
       >
     </label>
-
-    <div class="admin-form__form-array-options">
-      <a (click)="addControl(); $event.stopPropagation();">+ Добавить фото</a>
-      <p>|</p>
-      <a (click)="removeLastControl()">- Убрать фото</a>
-    </div>
 
     <p class="admin-form__error" *ngIf="error">ошибка</p>
     <input type="submit" class="admin-form__button" [disabled]="form.invalid || isSubmitted">

@@ -74,6 +74,10 @@
     &:disabled {
       background-color: #49a069bf;
     }
+
+    &_mb {
+      margin-bottom: 20px;
+    }
   }
 
   &__error {

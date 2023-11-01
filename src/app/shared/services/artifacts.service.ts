@@ -104,15 +104,4 @@ export class ArtifactsService implements MultipleFilesEntityService<ArtifactDTO,
       }
     );
   }
-
-  changePreview(id: number, imageId: number): Observable<HttpResponse<any>> {
-    return this.http.patch(
-      `${environment.ARTIFACTS_URL}/${id}/preview?imageId=${imageId}`,
-      null,
-      {
-        headers: this.tokenStorageService.getAuthHeader(),
-        observe: 'response'
-      }
-    );
-  }
 }

@@ -50,12 +50,4 @@ export class MedalsService implements OneFileEntityService<MedalDTO, MedalUpload
       {headers: this.tokenStorageService.getAuthHeader(), observe: 'response'}
     );
   }
-
-  changePreview(id: number, image: File): Observable<HttpResponse<any>> {
-    return this.http.patch(
-      `${environment.MEDALS_URL}/${id}/preview`,
-      image,
-      {headers: this.tokenStorageService.getAuthHeader(), observe: 'response'}
-    );
-  }
 }

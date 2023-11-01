@@ -14,6 +14,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import {ArticlesService} from "./services/articles.service";
 import {EnumTranslatorService} from "./services/enum-translator.service";
 import { FullscreenImageViewComponent } from './components/fullscreen-image-view/fullscreen-image-view.component';
+import {ImagesService} from "./services/images.service";
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { FullscreenImageViewComponent } from './components/fullscreen-image-view
     TokenStorageService,
     OptionsService,
     ArticlesService,
-    EnumTranslatorService
+    EnumTranslatorService,
+    ImagesService
   ],
   exports: [
     CommonModule,

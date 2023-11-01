@@ -5,14 +5,14 @@ import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ArtifactUploadDTO} from "../../../shared/interfaces/artifacts/artifact-upload.dto";
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {MultipleFileUploadForm} from "../../shared/upload-forms/multiple-file-upload-form";
+import {MultipleFilesEntityUploadForm} from "../../shared/upload-forms/create-forms/multiple-files-entity-upload-form";
 
 @Component({
   selector: 'app-create-artifact-page',
   templateUrl: './create-artifact-page.component.html',
   styleUrls: ['./create-artifact-page.component.scss']
 })
-export class CreateArtifactPageComponent extends MultipleFileUploadForm<ArtifactsService, ArtifactUploadDTO> {
+export class CreateArtifactPageComponent extends MultipleFilesEntityUploadForm<ArtifactsService, ArtifactUploadDTO> {
   constructor(public enumTranslator: EnumTranslatorService) {
     super();
   }

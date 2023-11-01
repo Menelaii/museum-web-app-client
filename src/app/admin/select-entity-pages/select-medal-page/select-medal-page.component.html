@@ -10,47 +10,30 @@
       <a routerLink="/admin/dashboard">Панель администратора</a>
     </li>
 
-    <li class="breadcrumb__item">
-      <a [routerLink]="['/admin/dashboard']"
-         [queryParams]="{entity: 'medals'}">
-        Награды
-      </a>
-    </li>
-
-    <li class="breadcrumb__item breadcrumb__item_active">Редактирование награды</li>
+    <li class="breadcrumb__item breadcrumb__item_active">Награды</li>
   </ol>
 </nav>
 
-<form class="admin-form admin-form_small" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <h1 class="admin-form__header">Редактирование награды</h1>
+<div class="admin-form">
+  <label>Чтобы выбрать награду нажмите на строку в таблице:</label>
+  <table *ngIf="entities$ | async as medals; else spinner" class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Название</th>
+    </tr>
+    </thead>
 
-  <ng-container *ngIf="!isSubmitted && !isLoading; else spinner">
-    <input
-      class="admin-form__input"
-      type="text"
-      formControlName="title"
-      placeholder="Название награды*"
-    >
+    <tbody>
+    <tr *ngFor="let medal of medals" (click)="onEntityClick(medal)">
+      <th scope="row">{{medal.id}}</th>
+      <td>{{medal.title}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
-    <input
-      class="admin-form__input"
-      type="text"
-      formControlName="description"
-      placeholder="Описание награды"
-    >
-
-    <p class="admin-form__error" *ngIf="error">ошибка</p>
-    <input type="submit" class="admin-form__button admin-form__button_mb" [disabled]="form.invalid || isSubmitted">
-
-    <div class="admin-form__form-array-options">
-      <a (click)="onPreviewChangerCollapseClick()">+- Поменять превью</a>
-    </div>
-    <div id="collapseBasic" [collapse]="isPreviewChangerCollapsed" style="width: 100%;">
-      <app-one-file-entity-image-editor></app-one-file-entity-image-editor>
-    </div>
-  </ng-container>
-
-</form>
+<app-confirmation-message-box></app-confirmation-message-box>
 
 <ng-template #spinner>
   <div class="spinner-container">
