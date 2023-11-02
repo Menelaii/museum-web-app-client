@@ -56,6 +56,8 @@ import {SelectArticlePageComponent} from './select-entity-pages/select-article-p
 import {SelectRankPageComponent} from './select-entity-pages/select-rank-page/select-rank-page.component';
 import { SelectArtifactPageComponent } from './select-entity-pages/select-artifact-page/select-artifact-page.component';
 import { SelectBiographyPageComponent } from './select-entity-pages/select-biography-page/select-biography-page.component';
+import {DateFormatService} from "./shared/services/date-format.service";
+import { EditBiographyPageComponent } from './edit-pages/edit-biography-page/edit-biography-page.component';
 
 @NgModule({
   imports: [
@@ -127,7 +129,11 @@ import { SelectBiographyPageComponent } from './select-entity-pages/select-biogr
     SelectRankPageComponent,
     SelectArtifactPageComponent,
     SelectBiographyPageComponent,
+    EditBiographyPageComponent,
   ],
+  providers: [
+    DateFormatService
+  ]
 })
 export class AdminModule {
 }

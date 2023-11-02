@@ -16,6 +16,13 @@ export class OneFileEntityImageEditorComponent implements OnDestroy {
   entityId: number | null = null;
   isInitialized = false;
   isLoading = false;
+  additionalContainerStyle: string | undefined;
+
+  stylePreferences = new Map<string, string>([
+    ['medals', 'preview-editor__img-container_medal'],
+    ['articles', 'preview-editor__img-container_article'],
+    ['ranks', 'preview-editor__img-container_rank'],
+  ])
 
   constructor(private service: ImagesService) {
   }
@@ -27,6 +34,7 @@ export class OneFileEntityImageEditorComponent implements OnDestroy {
 
     this.entityId = entityId;
     this.entityCode = entityCode;
+    this.additionalContainerStyle = this.stylePreferences.get(this.entityCode)
     this.existingPreview = preview;
 
     this.previewChanged.subscribe(onChanged);

@@ -1,0 +1,22 @@
+@import "/src/styles";
+@import "/src/app/admin/shared/styles/form-styles";
+@import "/src/app/shared/styles/breadcrumb";
+@import "/src/app/admin/shared/styles/sub-form-styles";
+
+.image-uploader {
+  &__check-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    input {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

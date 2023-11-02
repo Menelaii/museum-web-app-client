@@ -9,17 +9,18 @@ export abstract class EditForm<E, U, S extends Editor<E, U>> extends UploadForm<
   isLoading = true;
   entityId: number;
 
+  //todo snapshot в конструкторе
   constructor() {
     super();
     this.entityId = this.getActivatedRoute().snapshot.params['id'];
     this.fetch();
-    this.initializeForm(this.existingEntity);
   }
 
   fetch() {
     this.isLoading = true;
     this.service.getById(this.entityId).subscribe(value => {
       this.existingEntity = value;
+      this.initializeForm(this.existingEntity);
       this.isLoading = false;
     });
   }

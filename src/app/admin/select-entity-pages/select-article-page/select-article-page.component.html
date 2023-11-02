@@ -14,8 +14,10 @@
   </ol>
 </nav>
 
-<div class="admin-form">
-  <label>Чтобы выбрать новость нажмите на строку в таблице:</label>
+<div class="select-page">
+  <p class="select-page__title">Чтобы выбрать новость нажмите на строку в таблице</p>
+  <div class="select-page__title-separator"></div>
+
   <ng-container *ngIf="articles$ | async as page; else spinner">
     <table class="table table-striped table-hover">
       <thead>

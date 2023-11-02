@@ -10,6 +10,8 @@ import {ActivatedRoute} from "@angular/router";
 import {
   MultipleFilesEntityImageEditorComponent
 } from "../multiple-files-entity-image-editor/multiple-files-entity-image-editor.component";
+import {DateFormatService} from "../../shared/services/date-format.service";
+import {ImageAttachmentDTO} from "../../../shared/interfaces/file-attachments/image-attachment.dto";
 
 @Component({
   selector: 'app-edit-artifact-page',
@@ -17,12 +19,12 @@ import {
   styleUrls: ['./edit-artifact-page.component.scss']
 })
 export class EditArtifactPageComponent extends MultipleFilesEntityEditForm<ArtifactDTO, ArtifactUploadDTO, ArtifactsService>{
-  @ViewChild(MultipleFilesEntityImageEditorComponent)
-  imageEditor!: MultipleFilesEntityImageEditorComponent;
+  @ViewChild(MultipleFilesEntityImageEditorComponent) imageEditor!: MultipleFilesEntityImageEditorComponent;
 
   entityCode = 'artifacts';
 
-  constructor(public enumTranslator: EnumTranslatorService) {
+  constructor(public enumTranslator: EnumTranslatorService,
+              private dateFormatter: DateFormatService) {
     super();
   }
 
@@ -59,8 +61,15 @@ export class EditArtifactPageComponent extends MultipleFilesEntityEditForm<Artif
     };
   }
 
-  //todo ImageAttachmentDTO
-  extractImages(entity: ArtifactDTO): FileAttachmentDTO[] {
+  extractImages(entity: ArtifactDTO): ImageAttachmentDTO[] {
     return entity.images;
+  }
+
+  override initializeForm(entity: ArtifactDTO) {
+    super.initializeForm(entity);
+
+    this.form.patchValue({
+      creationPeriod: this.dateFormatter.transform(this.existingEntity.creationPeriod)
+    });
   }
 }

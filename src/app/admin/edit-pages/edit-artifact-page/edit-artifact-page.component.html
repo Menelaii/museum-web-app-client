@@ -66,7 +66,7 @@
     </label>
 
     <p class="admin-form__error" *ngIf="error">ошибка</p>
-    <input type="submit" class="admin-form__button" [disabled]="form.invalid || isSubmitted">
+    <input type="submit" class="admin-form__button admin-form__button_mb" [disabled]="form.invalid || isSubmitted">
 
     <div class="admin-form__form-array-options">
       <a (click)="onImageEditorCollapseClick()">+- Редактировать вложения</a>

@@ -1,3 +1,4 @@
-@import "/src/styles";
-@import "/src/app/admin/shared/styles/form-styles";
-@import "/src/app/shared/styles/breadcrumb";
+@import "src/styles.scss";
+@import "src/app/shared/styles/spinner.scss";
+@import "src/app/shared/styles/breadcrumb.scss";
+@import "/src/app/admin/shared/styles/select-page-styles";

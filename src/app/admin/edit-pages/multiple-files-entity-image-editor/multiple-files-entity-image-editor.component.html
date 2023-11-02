@@ -1,15 +1,24 @@
-<div class="sub-form" *ngIf="isInitialized && !isLoading; else spinner">
-  <p class="sub-form__title">Редактирование картинок</p>
-  <hr>
-  <app-image-editor></app-image-editor>
-  <hr>
-  <app-image-uploader></app-image-uploader>
-</div>
+<div class="sub-form">
+  <p class="sub-form__title">Текущее превью</p>
+  <div class="sub-form__title-separator"></div>
 
-<ng-template #spinner>
-  <div class="spinner-container">
+  <ng-container *ngIf="preview">
+    <div class="multiple-image-editor__img-container">
+      <img [src]="preview.uri" alt="preview">
+    </div>
+  </ng-container>
+
+  <p class="sub-form__title">Редактирование картинок</p>
+  <div class="sub-form__title-separator"></div>
+
+  <div class="spinner-container" *ngIf="!isInitialized || isLoading">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Загрузка...</span>
     </div>
   </div>
-</ng-template>
+
+  <div [style.display]="isInitialized && !isLoading ? 'block' : 'none'">
+    <app-image-editor></app-image-editor>
+    <app-image-uploader></app-image-uploader>
+  </div>
+</div>

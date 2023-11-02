@@ -17,12 +17,12 @@
             </a>
         </li>
 
-        <li class="breadcrumb__item breadcrumb__item_active">Создание нового звания</li>
+        <li class="breadcrumb__item breadcrumb__item_active">Редактирование звания</li>
     </ol>
 </nav>
 
 <form class="admin-form admin-form_small" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <h1 class="admin-form__header">Создание нового звания</h1>
+    <h1 class="admin-form__header">Редактирование звания</h1>
 
     <ng-container *ngIf="!isSubmitted && !isLoading; else spinner">
         <input
@@ -33,7 +33,7 @@
         >
 
       <p class="admin-form__error" *ngIf="error">ошибка</p>
-      <input type="submit" class="admin-form__button admin-form__button_mb" [disabled]="form.invalid || isSubmitted">
+      <input type="submit" class="admin-form__button admin-form__button_mb admin-form__button_wide" [disabled]="form.invalid || isSubmitted">
 
 
       <div class="admin-form__form-array-options">

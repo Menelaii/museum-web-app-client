@@ -4,6 +4,7 @@ import {FileAttachmentDTO} from "../../../../shared/interfaces/file-attachments/
 import {
   MultipleFilesEntityImageEditorComponent
 } from "../../../edit-pages/multiple-files-entity-image-editor/multiple-files-entity-image-editor.component";
+import {ImageAttachmentDTO} from "../../../../shared/interfaces/file-attachments/image-attachment.dto";
 
 export abstract class MultipleFilesEntityEditForm<E, U, S extends Editor<E, U>> extends EditForm<E, U, S> {
   abstract entityCode: string;
@@ -11,13 +12,18 @@ export abstract class MultipleFilesEntityEditForm<E, U, S extends Editor<E, U>> 
 
   isImageEditorCollapsed = true;
 
+  //todo default preview return
   onImageEditorCollapseClick() {
     this.isImageEditorCollapsed = !this.isImageEditorCollapsed;
     if (!this.isImageEditorCollapsed) {
+      const images = this.extractImages(this.existingEntity);
+      const preview
+        = images.find(i => i.isPreview);
       this.imageEditor.init(
         this.entityId,
         this.entityCode,
-        this.extractImages(this.existingEntity),
+        preview ?? null,
+        images,
         this.onChangesSubmitted
       )
     }
@@ -28,5 +34,5 @@ export abstract class MultipleFilesEntityEditForm<E, U, S extends Editor<E, U>> 
     this.isImageEditorCollapsed = true;
   }
 
-  abstract extractImages(entity: E): FileAttachmentDTO[];
+  abstract extractImages(entity: E): ImageAttachmentDTO[];
 }

@@ -18,6 +18,7 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
 
   entityCode: string | null = null;
   entityId: number | null = null;
+  preview: FileAttachmentDTO | null = null;
 
   isInitialized = false;
   isLoading = false;
@@ -27,6 +28,7 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
 
   init(entityId: number,
        entityCode: string,
+       preview: FileAttachmentDTO | null,
        images: FileAttachmentDTO[],
        onChangesSubmitted: () => void
   ) {
@@ -34,8 +36,11 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
 
     this.entityId = entityId;
     this.entityCode = entityCode;
+    this.preview = preview;
 
     this.changesSubmitted.subscribe(onChangesSubmitted);
+
+    console.dir(images);
 
     this.imageUploader.init(this.onUpload);
     this.imageEditor.init(images, this.onDelete, this.onSetAsPreview);
@@ -68,6 +73,7 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
     this.isInitialized = false;
     this.entityId = null;
     this.entityCode = null;
+    this.preview = null;
 
     this.imageUploader.reset();
     this.imageEditor.reset();

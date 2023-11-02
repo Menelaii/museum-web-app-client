@@ -1,15 +1,16 @@
 <div class="sub-form" *ngIf="isInitialized; else spinner">
   <p class="sub-form__title">Добавить фотографию</p>
+  <div class="sub-form__title-separator"></div>
 
-  <form [formGroup]="form" class="sub-form">
-    <label>
-      Это превью
+  <form [formGroup]="form" class="sub-form image-uploader">
+    <div class="image-uploader__check-box">
       <input
-        class="admin-form__input"
         type="checkbox"
+        id="flexCheckDefault"
         formControlName="isPreview"
       >
-    </label>
+      <p>Это превью</p>
+    </div>
 
     <input
       class="admin-form__input_file form-control"
@@ -18,11 +19,11 @@
     >
 
     <button
-      type="submit" class="admin-form__button"
+      type="submit" class="admin-form__button admin-form__button_wide"
       (click)="submit()"
       [disabled]="!isValid()"
     >
-      Добавить картинку превью
+      Добавить фотографию
     </button>
   </form>
 </div>
