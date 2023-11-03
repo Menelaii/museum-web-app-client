@@ -11,18 +11,17 @@
     </li>
 
     <li class="breadcrumb__item">
-      <a [routerLink]="['/admin/dashboard']"
-         [queryParams]="{entity: 'artifacts'}">
+      <a [routerLink]="['/admin/artifacts/edit']">
         Предметы
       </a>
     </li>
 
-    <li class="breadcrumb__item breadcrumb__item_active">Создание нового предмета</li>
+    <li class="breadcrumb__item breadcrumb__item_active">Редактирование предмета</li>
   </ol>
 </nav>
 
 <form class="admin-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <h1 class="admin-form__header">Создание нового предмета</h1>
+  <h1 class="admin-form__header">Редактирование предмета</h1>
 
   <ng-container *ngIf="!isSubmitted && !isLoading; else spinner">
     <input

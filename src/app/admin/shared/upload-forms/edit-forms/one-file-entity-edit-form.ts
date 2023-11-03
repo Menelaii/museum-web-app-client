@@ -13,18 +13,23 @@ export abstract class OneFileEntityEditForm<E, U, S extends Editor<E, U>> extend
   onPreviewChangerCollapseClick() {
     this.isPreviewChangerCollapsed = !this.isPreviewChangerCollapsed;
     if (!this.isPreviewChangerCollapsed) {
-      this.previewChanger.init(
-        this.entityId,
-        this.entityCode,
-        this.extractPreview(this.existingEntity),
-        this.onPreviewChanged
-      )
+      this.initializePreviewChanger();
     }
   }
 
+  // todo init preview changer and collapse false
   onPreviewChanged = () => {
     this.fetch();
     this.isPreviewChangerCollapsed = true;
+  }
+
+  initializePreviewChanger() {
+    this.previewChanger.init(
+      this.entityId,
+      this.entityCode,
+      this.extractPreview(this.existingEntity),
+      this.onPreviewChanged
+    )
   }
 
   abstract extractPreview(existingEntity: E): FileAttachmentDTO;

@@ -16,11 +16,16 @@ export abstract class EditForm<E, U, S extends Editor<E, U>> extends UploadForm<
     this.fetch();
   }
 
-  fetch() {
+  fetch(callback?: () => void) {
     this.isLoading = true;
     this.service.getById(this.entityId).subscribe(value => {
       this.existingEntity = value;
       this.initializeForm(this.existingEntity);
+
+      if (callback) {
+        callback();
+      }
+
       this.isLoading = false;
     });
   }

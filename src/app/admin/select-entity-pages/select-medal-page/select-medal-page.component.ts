@@ -28,10 +28,6 @@ export class SelectMedalPageComponent extends SelectPage<MedalShortDTO, MedalsSe
     return `Удалить награду: ${entity.title}?`
   }
 
-  buildEditMessage(entity: MedalShortDTO): string {
-    return `Редактировать награду: ${entity.title}?`
-  }
-
   onDelete(id: number): void {
     this.service.delete(id).subscribe(()=> {
       this.entities$ = this.service.getAll();

@@ -15,9 +15,7 @@ export class ImageUploaderComponent {
 
   constructor() {
     this.form = new FormGroup({
-      isPreview: new FormControl(false, [
-        Validators.required
-      ]),
+      isPreview: new FormControl(false),
       image: new FormControl('', [
         Validators.required
       ])
@@ -39,6 +37,8 @@ export class ImageUploaderComponent {
     }
 
     this.selectedFile = input.files[0] as File;
+
+    this.form.patchValue({image: this.selectedFile.name})
   }
 
   submit() {

@@ -9,13 +9,14 @@
       </svg>
       <a routerLink="/admin/dashboard">Панель администратора</a>
     </li>
+
     <li class="breadcrumb__item">
-      <a [routerLink]="['/admin/dashboard']"
-         [queryParams]="{entity: 'articles'}">
+      <a [routerLink]="['/admin/articles/edit']">
         Новости
       </a>
     </li>
-    <li class="breadcrumb__item breadcrumb__item_active">Создание нового поста</li>
+
+    <li class="breadcrumb__item breadcrumb__item_active">Редактирование поста</li>
   </ol>
 </nav>
 

@@ -51,10 +51,6 @@ export class SelectBiographyPageComponent extends SelectPage<BiographyShortDTO, 
     return `Вы действительно хотите удалить биографию: ${entity.surname} ${entity.name}?`
   }
 
-  buildEditMessage(entity: BiographyShortDTO): string {
-    return `Редактировать биографию: ${entity.surname} ${entity.name}?`
-  }
-
   onDelete(id: number): void {
     this.service.delete(id).subscribe(()=>{
       this.biographies$ = this.service.getAllWithFilters(this.pagination, {});

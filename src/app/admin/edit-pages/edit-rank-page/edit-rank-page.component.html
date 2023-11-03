@@ -11,8 +11,7 @@
         </li>
 
         <li class="breadcrumb__item">
-            <a [routerLink]="['/admin/dashboard']"
-               [queryParams]="{entity: 'ranks'}">
+            <a [routerLink]="['/admin/ranks/edit']">
                 Звания
             </a>
         </li>
@@ -37,10 +36,10 @@
 
 
       <div class="admin-form__form-array-options">
-        <a (click)="onPreviewChangerCollapseClick()">+- Поменять превью</a>
+        <a (click)="onPreviewChangerCollapseClick()">+- Поменять обложку</a>
       </div>
       <hr>
-      <div id="collapseBasic" [collapse]="isPreviewChangerCollapsed" style="width: 100%;">
+      <div style="width: 100%;" [style.display]="isPreviewChangerCollapsed ? 'none' : 'block'">
         <app-one-file-entity-image-editor></app-one-file-entity-image-editor>
       </div>
     </ng-container>

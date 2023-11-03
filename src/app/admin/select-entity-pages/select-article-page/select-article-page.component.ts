@@ -51,10 +51,6 @@ export class SelectArticlePageComponent extends SelectPage<ArticleShortDTO, Arti
     return `Вы действительно хотите удалить новость: ${entity.title}?`
   }
 
-  buildEditMessage(entity: ArticleShortDTO): string {
-    return `Редактировать новость: ${entity.title}?`
-  }
-
   onDelete(id: number): void {
     this.service.delete(id).subscribe(()=> {
       this.entities$ = this.getAllEntities()

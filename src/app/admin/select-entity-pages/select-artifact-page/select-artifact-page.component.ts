@@ -56,8 +56,4 @@ export class SelectArtifactPageComponent extends SelectPage<ArtifactShortDTO, Ar
   buildDeleteMessage(entity: ArtifactShortDTO): string {
     return `Вы действительно хотите удалить предмет: ${entity.title}?`
   }
-
-  buildEditMessage(entity: ArtifactShortDTO): string {
-    return `Редактировать предмет: ${entity.title}?`
-  }
 }

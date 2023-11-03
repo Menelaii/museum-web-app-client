@@ -43,7 +43,7 @@ export class ImagesService {
   addImage(entityCode: string, entityId: number, image: File, isPreview: boolean) {
     this.throwIfInvalidMultipleFilesEntity(entityCode);
 
-    const url = `${this.oneFileEntitiesUrls.get(entityCode)}/${entityId}/images?isPreview=${isPreview}`;
+    const url = `${this.multipleFilesEntitiesUrls.get(entityCode)}/${entityId}/images?isPreview=${isPreview}`;
 
     const formData = new FormData();
     formData.append('image', image, image.name);
@@ -61,7 +61,7 @@ export class ImagesService {
   setAsPreview(entityCode: string, entityId: number, imageId: number) {
     this.throwIfInvalidMultipleFilesEntity(entityCode);
 
-    const url = `${this.multipleFilesEntitiesUrls.get(entityCode)}/${entityId}/preview?imageId=${imageId}`;
+    const url = `${this.multipleFilesEntitiesUrls.get(entityCode)}/${entityId}/preview?previewId=${imageId}`;
 
     return this.http.patch(
       url,

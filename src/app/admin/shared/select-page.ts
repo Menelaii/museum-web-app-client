@@ -27,15 +27,20 @@ export abstract class SelectPage<E extends {id: number}, S> {
 
   onEntityClick(entity: E) {
     this.selected = entity;
-    const onConfirmedBound = this.onConfirmed.bind(this);
-    this.messageBox.open(this.buildMessage(entity), onConfirmedBound);
+
+    if (this.action == 'delete') {
+      const onConfirmedBound = this.onConfirmed.bind(this);
+      this.messageBox.open(this.buildMessage(entity), onConfirmedBound);
+    } else if (this.action == 'edit') {
+      this.onEdit(this.selected.id);
+    } else {
+      throw new Error('Invalid action ' + this.action);
+    }
   }
 
   buildMessage(entity: E): string {
     let message: string;
-    if (this.action == 'edit') {
-      message = this.buildEditMessage(entity);
-    } else if (this.action == 'delete') {
+    if (this.action == 'delete') {
       message = this.buildDeleteMessage(entity);
     } else {
       throw new Error('Invalid action ' + this.action);
@@ -51,8 +56,6 @@ export abstract class SelectPage<E extends {id: number}, S> {
 
     if (this.action == 'delete') {
       this.onDelete(this.selected.id);
-    } else if (this.action == 'edit') {
-      this.onEdit(this.selected.id);
     } else {
       throw new Error('Invalid action ' + this.action);
     }
@@ -69,8 +72,6 @@ export abstract class SelectPage<E extends {id: number}, S> {
   abstract getAllEntities(): Observable<E[]>;
 
   abstract buildDeleteMessage(entity: E): string;
-
-  abstract buildEditMessage(entity: E): string;
 
   abstract onDelete(id: number): void;
 }

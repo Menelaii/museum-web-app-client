@@ -28,10 +28,6 @@ export class SelectRankPageComponent extends SelectPage<MilitaryRankShortDTO, Mi
     return `Вы действительно хотите удалить звание: ${entity.title}?`
   }
 
-  buildEditMessage(entity: MilitaryRankShortDTO): string {
-    return `Редактировать звание: ${entity.title}?`
-  }
-
   onDelete(id: number): void {
     this.service.delete(id).subscribe(()=>{
       this.entities$ = this.service.getAll();

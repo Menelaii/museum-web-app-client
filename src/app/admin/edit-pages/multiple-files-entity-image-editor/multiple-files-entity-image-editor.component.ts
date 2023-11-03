@@ -40,8 +40,6 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
 
     this.changesSubmitted.subscribe(onChangesSubmitted);
 
-    console.dir(images);
-
     this.imageUploader.init(this.onUpload);
     this.imageEditor.init(images, this.onDelete, this.onSetAsPreview);
 
@@ -49,6 +47,7 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
   }
 
   onUpload = (data: {file: File, isPreview: boolean}) => {
+
     // @ts-ignore
     this.service.addImage(this.entityCode, this.entityId, data.file, data.isPreview).subscribe(()=> {
       this.changesSubmitted.next();
