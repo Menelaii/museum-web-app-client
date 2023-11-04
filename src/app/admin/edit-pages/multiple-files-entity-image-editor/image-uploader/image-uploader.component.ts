@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {Subject} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FileInputHandler} from "../../../shared/file-input-handler";
+import transformJavaScript
+  from "@angular-devkit/build-angular/src/builders/browser-esbuild/javascript-transformer-worker";
 
 @Component({
   selector: 'app-image-uploader',
@@ -8,12 +11,14 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./image-uploader.component.scss']
 })
 export class ImageUploaderComponent {
-  selectedFile: File | null = null;
   submitted: Subject<{file: File; isPreview: boolean}> = new Subject<{file: File; isPreview: boolean}>();
   isInitialized = false;
   form: FormGroup;
+  fileInputHandler: FileInputHandler;
 
   constructor() {
+    this.fileInputHandler = new FileInputHandler();
+
     this.form = new FormGroup({
       isPreview: new FormControl(false),
       image: new FormControl('', [
@@ -31,14 +36,8 @@ export class ImageUploaderComponent {
   }
 
   onFileChanged($event: Event) {
-    const input = $event.target as HTMLInputElement;
-    if (!input.files) {
-      return;
-    }
-
-    this.selectedFile = input.files[0] as File;
-
-    this.form.patchValue({image: this.selectedFile.name})
+    this.fileInputHandler.onFileChanged($event);
+    this.form.patchValue({image: this.fileInputHandler.getSelectedFileName()})
   }
 
   submit() {
@@ -47,7 +46,7 @@ export class ImageUploaderComponent {
     }
 
     // @ts-ignore
-    const file: File = this.selectedFile;
+    const file: File = this.fileInputHandler.selectedFile;
     this.submitted.next({
       file: file,
       isPreview: this.form.value.isPreview
@@ -57,12 +56,12 @@ export class ImageUploaderComponent {
   }
 
   isValid(): boolean {
-    return this.form.valid && this.selectedFile != null;
+    return this.form.valid && this.fileInputHandler.isPresent();
   }
 
   reset() {
     this.isInitialized = false;
-    this.selectedFile = null;
+    this.fileInputHandler.reset();
 
     if (this.submitted) {
       this.submitted.unsubscribe();

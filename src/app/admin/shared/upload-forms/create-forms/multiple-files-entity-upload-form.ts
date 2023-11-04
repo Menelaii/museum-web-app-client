@@ -42,7 +42,7 @@ export abstract class MultipleFilesEntityUploadForm<S extends CreatorWithMultipl
   }
 
   addControl() {
-    this.formArrayController.addControl();
+    this.formArrayController.createControl();
   }
 
   removeLastControl() {

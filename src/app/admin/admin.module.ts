@@ -58,6 +58,10 @@ import { SelectArtifactPageComponent } from './select-entity-pages/select-artifa
 import { SelectBiographyPageComponent } from './select-entity-pages/select-biography-page/select-biography-page.component';
 import {DateFormatService} from "./shared/services/date-format.service";
 import { EditBiographyPageComponent } from './edit-pages/edit-biography-page/edit-biography-page.component';
+import { PresentationEditorComponent } from './edit-pages/edit-biography-page/presentation-editor/presentation-editor.component';
+import { EditCareerDetailsFormArrayComponent } from './edit-pages/edit-biography-page/edit-career-details-form-array/edit-career-details-form-array.component';
+import { EditMedalDetailsFormArrayComponent } from './edit-pages/edit-biography-page/edit-medal-details-form-array/edit-medal-details-form-array.component';
+import { EditMilitaryRankDetailsFormArrayComponent } from './edit-pages/edit-biography-page/edit-military-rank-details-form-array/edit-military-rank-details-form-array.component';
 
 @NgModule({
   imports: [
@@ -72,6 +76,7 @@ import { EditBiographyPageComponent } from './edit-pages/edit-biography-page/edi
           {path: 'biographies/new', component: CreateBiographyPageComponent, canActivate: [authGuardFn]},
           {path: 'biographies/delete', component: SelectBiographyPageComponent, canActivate: [authGuardFn]},
           {path: 'biographies/edit', component: SelectBiographyPageComponent, canActivate: [authGuardFn]},
+          {path: 'biographies/:id/edit', component: EditBiographyPageComponent, canActivate: [authGuardFn]},
           {path: 'medals/new', component: CreateMedalPageComponent, canActivate: [authGuardFn]},
           {path: 'medals/edit', component: SelectMedalPageComponent, canActivate: [authGuardFn]},
           {path: 'medals/delete', component: SelectMedalPageComponent, canActivate: [authGuardFn]},
@@ -130,6 +135,10 @@ import { EditBiographyPageComponent } from './edit-pages/edit-biography-page/edi
     SelectArtifactPageComponent,
     SelectBiographyPageComponent,
     EditBiographyPageComponent,
+    PresentationEditorComponent,
+    EditCareerDetailsFormArrayComponent,
+    EditMedalDetailsFormArrayComponent,
+    EditMilitaryRankDetailsFormArrayComponent,
   ],
   providers: [
     DateFormatService

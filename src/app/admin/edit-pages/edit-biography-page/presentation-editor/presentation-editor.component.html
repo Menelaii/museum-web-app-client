@@ -1,0 +1,35 @@
+<div class="sub-form" *ngIf="isInitialized && !isLoading; else spinner">
+  <p class="sub-form__title">Текущая презентация</p>
+  <div class="sub-form__title-separator"></div>
+
+  <ng-container *ngIf="existingPresentation">
+    <iframe [src]="existingPresentation.uri"></iframe>
+  </ng-container>
+
+  <p class="sub-form__title">Заменить презентацию</p>
+  <div class="sub-form__title-separator"></div>
+
+  <form [formGroup]="form" class="sub-form image-uploader">
+    <input
+      class="admin-form__input_file form-control"
+      type="file"
+      (change)="onFileChanged($event)"
+    >
+
+    <button
+      type="submit" class="admin-form__button admin-form__button_wide"
+      (click)="submit()"
+      [disabled]="!isValid()"
+    >
+      Добавить презентацию
+    </button>
+  </form>
+</div>
+
+<ng-template #spinner>
+  <div class="spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+  </div>
+</ng-template>

@@ -12,18 +12,13 @@ export abstract class MultipleFilesEntityEditForm<E, U, S extends Editor<E, U>> 
 
   isImageEditorCollapsed = true;
 
-  //todo default preview return
   onImageEditorCollapseClick() {
     this.isImageEditorCollapsed = !this.isImageEditorCollapsed;
     if (!this.isImageEditorCollapsed) {
-      const images = this.extractImages(this.existingEntity);
-      const preview
-        = images.find(i => i.isPreview);
       this.imageEditor.init(
         this.entityId,
         this.entityCode,
-        preview ?? null,
-        images,
+        this.extractImages(this.existingEntity),
         this.onChangesSubmitted
       )
     }

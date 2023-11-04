@@ -142,25 +142,4 @@ export class BiographiesService implements MultipleFilesEntityService<BiographyD
       }
     );
   }
-
-  changePreview(id: number, imageId: number): Observable<HttpResponse<any>> {
-    return this.http.patch(
-      `${environment.BIOGRAPHIES_URL}/${id}/preview?imageId=${imageId}`,
-      null,
-      {
-        headers: this.tokenStorageService.getAuthHeader(),
-        observe: 'response'
-      }
-    );
-  }
-
-  deleteImage(biographyId: number, imageId: number): Observable<HttpResponse<any>> {
-    return this.http.delete(
-      `${environment.BIOGRAPHIES_URL}/${biographyId}/images/${imageId}`,
-      {
-        headers: this.tokenStorageService.getAuthHeader(),
-        observe: 'response'
-      }
-    );
-  }
 }

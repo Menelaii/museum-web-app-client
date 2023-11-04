@@ -2,7 +2,11 @@
 
   <div class="image-editor__grid">
     <ng-container *ngFor="let image of images">
-      <img src="{{image.uri}}" alt="img..." (click)="onImageClick(image)"/>
+      <img src="{{image.uri}}"
+           alt="img..."
+           (click)="onImageClick(image)"
+           [ngClass]="{'image-editor__preview' : image.isPreview}"
+      />
     </ng-container>
   </div>
 

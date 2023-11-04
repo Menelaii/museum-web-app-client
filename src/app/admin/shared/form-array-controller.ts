@@ -20,11 +20,19 @@ export class FormArrayController<C extends FormGroup | FormControl> {
     return this.controls;
   }
 
-  addControl() {
+  createControl() {
     this.formArray.push(this.factoryFunc());
+  }
+
+  addControl(control: C) {
+    this.formArray.push(control);
   }
 
   removeLastControl() {
     this.formArray.removeAt(this.formArray.length - 1);
+  }
+
+  reset() {
+    this.formArray.reset();
   }
 }

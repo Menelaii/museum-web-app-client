@@ -1,9 +1,9 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {FileAttachmentDTO} from "../../../shared/interfaces/file-attachments/file-attachment.dto";
 import {Subject} from "rxjs";
 import {ImagesService} from "../../../shared/services/images.service";
 import {ImageUploaderComponent} from "./image-uploader/image-uploader.component";
 import {ImageEditorComponent} from "./image-editor/image-editor.component";
+import {ImageAttachmentDTO} from "../../../shared/interfaces/file-attachments/image-attachment.dto";
 
 @Component({
   selector: 'app-multiple-files-entity-image-editor',
@@ -18,7 +18,6 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
 
   entityCode: string | null = null;
   entityId: number | null = null;
-  preview: FileAttachmentDTO | null = null;
 
   isInitialized = false;
   isLoading = false;
@@ -28,15 +27,13 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
 
   init(entityId: number,
        entityCode: string,
-       preview: FileAttachmentDTO | null,
-       images: FileAttachmentDTO[],
+       images: ImageAttachmentDTO[],
        onChangesSubmitted: () => void
   ) {
     this.reset();
 
     this.entityId = entityId;
     this.entityCode = entityCode;
-    this.preview = preview;
 
     this.changesSubmitted.subscribe(onChangesSubmitted);
 
@@ -72,7 +69,6 @@ export class MultipleFilesEntityImageEditorComponent implements OnDestroy {
     this.isInitialized = false;
     this.entityId = null;
     this.entityCode = null;
-    this.preview = null;
 
     this.imageUploader.reset();
     this.imageEditor.reset();

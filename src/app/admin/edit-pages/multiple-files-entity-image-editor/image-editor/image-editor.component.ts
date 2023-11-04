@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Subject} from "rxjs";
 import {EditorActions} from "./editor-actions";
 import {FileAttachmentDTO} from "../../../../shared/interfaces/file-attachments/file-attachment.dto";
+import {ImageAttachmentDTO} from "../../../../shared/interfaces/file-attachments/image-attachment.dto";
 
 @Component({
   selector: 'app-image-editor',
@@ -13,9 +14,9 @@ export class ImageEditorComponent {
   onSetAsPreview: Subject<number> = new Subject<number>();
   isInitialized = false;
   selectedAction = EditorActions.UNDEFINED;
-  images:FileAttachmentDTO[] = [];
+  images:ImageAttachmentDTO[] = [];
 
-  init(images: FileAttachmentDTO[],
+  init(images: ImageAttachmentDTO[],
        onDelete: (id: number) => void,
        onSetAsPreview: (id: number) => void
   ) {
